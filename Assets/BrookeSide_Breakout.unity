@@ -663,7 +663,7 @@ GameObject:
   - component: {fileID: 187928623}
   - component: {fileID: 187928622}
   - component: {fileID: 187928627}
-  - component: {fileID: 187928626}
+  - component: {fileID: 187928628}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -760,6 +760,7 @@ Transform:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+<<<<<<< Updated upstream
 --- !u!114 &187928626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,6 +783,8 @@ MonoBehaviour:
   controller: {fileID: 0}
   currentDir: {x: 0, y: 0}
   currentDirVelocity: {x: 0, y: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!143 &187928627
 CharacterController:
   m_ObjectHideFlags: 0
@@ -808,6 +811,28 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &187928628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187928621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d898c68b3941cc4a97738cb77f6e5f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 963194228}
+  mouseSensitivity: 3.5
+  walkSpeed: 6
+  gravity: -13
+  smoothMoveTime: 0.3
+  mouseSmoothTime: 0.03
+  lockCursor: 1
+  controller: {fileID: 187928627}
+  currentDir: {x: 0, y: 0}
+  currentDirVelocity: {x: 0, y: 0}
 --- !u!1 &205701603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,6 +1846,23 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1212253474
 MonoBehaviour:
+<<<<<<< Updated upstream
+=======
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212253469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fa5166111ae70a4895eddd916d69070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditionToOpen: 0
+  conditionReference: {fileID: 187928621}
+--- !u!1 &1291352047
+GameObject:
+>>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1951,8 +1993,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa5166111ae70a4895eddd916d69070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   conditionToOpen: 0
   conditionReference: {fileID: 0}
+=======
+  conditionToOpen: 2
+  conditionReference: {fileID: 1787039490}
+>>>>>>> Stashed changes
 --- !u!1 &1545779009
 GameObject:
   m_ObjectHideFlags: 0
@@ -2176,8 +2223,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa5166111ae70a4895eddd916d69070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   conditionToOpen: 0
   conditionReference: {fileID: 0}
+=======
+  conditionToOpen: 1
+  conditionReference: {fileID: 1787039490}
+>>>>>>> Stashed changes
 --- !u!1 &1733816147
 GameObject:
   m_ObjectHideFlags: 0
