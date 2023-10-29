@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] Transform playerCamera = null;
+    [SerializeField] public Transform playerCamera = null;
     [SerializeField] float mouseSensitivity = 3.5f;
     [SerializeField] float walkSpeed = 6.0f;
     [SerializeField] float gravity = -13.0f;
@@ -15,10 +15,10 @@ public class PlayerController : MonoBehaviour
 
     float cameraPitch = 0.0f;
     float velocityY = 0.0f;
-    CharacterController controller = null;
+    public CharacterController controller = null;
 
-    Vector2 currentDir = Vector2.zero;
-    Vector2 currentDirVelocity = Vector2.zero;
+    public Vector2 currentDir = Vector2.zero;
+    public Vector2 currentDirVelocity = Vector2.zero;
 
     Vector2 currentMouseDelta = Vector2.zero;
     Vector2 currentMouseDeltaVelocity = Vector2.zero;
