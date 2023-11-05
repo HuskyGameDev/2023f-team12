@@ -4369,6 +4369,7 @@ GameObject:
   - component: {fileID: 1787039493}
   - component: {fileID: 1787039492}
   - component: {fileID: 1787039491}
+  - component: {fileID: 1787039495}
   m_Layer: 6
   m_Name: Object_1
   m_TagString: Untagged
@@ -4462,6 +4463,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1787039495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787039490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5739a1e4db46a9a49afb274848b240ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1829525934
 GameObject:
   m_ObjectHideFlags: 0
@@ -4735,6 +4748,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e3dde3cfae8a3c04b93ffbf4393e476c, type: 3}
       propertyPath: m_Name
       value: Key_inprogress
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e3dde3cfae8a3c04b93ffbf4393e476c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: e3dde3cfae8a3c04b93ffbf4393e476c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
