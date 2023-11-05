@@ -799,12 +799,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 963194228}
-  mouseSensitivity: 3.5
+  mouseSensitivity: 1.5
   walkSpeed: 6
   gravity: -13
   smoothMoveTime: 0.3
   mouseSmoothTime: 0.03
   lockCursor: 1
+  reach: 4
   controller: {fileID: 187928627}
   currentDir: {x: 0, y: 0}
   currentDirVelocity: {x: 0, y: 0}
@@ -3063,6 +3064,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conditionToOpen: 0
   conditionReference: {fileID: 187928621}
+  endPos: {x: 6.283, y: 1.424, z: -2.109}
+  moveDuration: 3
 --- !u!1001 &1215460970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3504,6 +3507,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conditionToOpen: 2
   conditionReference: {fileID: 1787039490}
+  endPos: {x: -2.476, y: 1.424, z: -2.109}
+  moveDuration: 3
 --- !u!1 &1437084779
 GameObject:
   m_ObjectHideFlags: 0
@@ -3859,7 +3864,7 @@ Transform:
   m_GameObject: {fileID: 1566464046}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.001, y: 1.424, z: -8.467}
+  m_LocalPosition: {x: 2, y: 1.424, z: -8.467}
   m_LocalScale: {x: 0.1, y: 0.9, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3879,6 +3884,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conditionToOpen: 1
   conditionReference: {fileID: 1787039490}
+  endPos: {x: 2, y: 1.424, z: -6.941}
+  moveDuration: 3
 --- !u!1 &1614416974
 GameObject:
   m_ObjectHideFlags: 0
