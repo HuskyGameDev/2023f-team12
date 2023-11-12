@@ -13,23 +13,29 @@ public class TutorialGate : MonoBehaviour
 
     [SerializeField] GateCondition conditionToOpen;
     [SerializeField] GameObject conditionReference;
+    [SerializeField] Vector3 endPos;
+    [SerializeField] float moveDuration = 3f;
 
     private bool conditionMet = false;
     private bool finishedMoving = false;
+    private float moveTime = 0f;
+    private Vector3 startPos;
 
     void Start()
     {
-        //
+        startPos = gameObject.transform.position;
     }
 
     void Update()
     {
+        float deltaTime = Time.deltaTime;
         if (conditionMet)
         {
             if (!finishedMoving)
             {
-                finishedMoving = true;
-                transform.position = new(transform.position.x, transform.position.y - 100, transform.position.z);
+                transform.Translate(new Vector3(endPos.x - startPos.x, endPos.y - startPos.y, endPos.z - startPos.z) * deltaTime / moveDuration);
+                moveTime += deltaTime;
+                finishedMoving = moveTime >= moveDuration;
             }
         }
         else

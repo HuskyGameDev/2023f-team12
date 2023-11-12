@@ -5,13 +5,15 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] public Transform playerCamera = null;
-    [SerializeField] float mouseSensitivity = 3.5f;
+    [SerializeField] float mouseSensitivity = 1f;
     [SerializeField] float walkSpeed = 6.0f;
     [SerializeField] float gravity = -13.0f;
     [SerializeField] [Range(0.0f, 0.5f)] float smoothMoveTime = 0.3f;
     [SerializeField] [Range(0.0f, 0.5f)] float mouseSmoothTime = 0.03f;
 
     [SerializeField] bool lockCursor = true;
+
+    [SerializeField] float reach = 4f;
 
     float cameraPitch = 0.0f;
     float velocityY = 0.0f;
@@ -35,8 +37,17 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Static.player = gameObject;
+
+        // Deal with movement
         UpdateMouseLook();
         UpdateMovement();
+
+        // Deal with interacting/picking up objects
+        if(Input.GetMouseButtonDown(0))
+        {
+            TryInteract();
+        }
     }
 
     void UpdateMouseLook()
@@ -44,13 +55,10 @@ public class PlayerController : MonoBehaviour
         Vector2 targetMouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
         currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, targetMouseDelta, ref currentMouseDeltaVelocity, mouseSmoothTime);
-
         cameraPitch -= currentMouseDelta.y * mouseSensitivity;
-
         cameraPitch = Mathf.Clamp(cameraPitch, -90.0f, 90.0f);
 
         playerCamera.localEulerAngles = Vector3.right * cameraPitch;
-
         transform.Rotate(Vector3.up * currentMouseDelta.x * mouseSensitivity);
     }
 
@@ -69,5 +77,23 @@ public class PlayerController : MonoBehaviour
 
         Vector3 velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * walkSpeed + Vector3.up * velocityY;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    void TryInteract()
+    {
+        // Create raycast
+        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+        RaycastHit info;
+        bool result = Physics.Raycast(ray, out info);
+        if (result)
+        {
+            // Filter out anything we don't want
+            // Interactable layer id is 6
+            if (info.distance > reach || info.collider.gameObject.layer != 6)
+                return;
+
+            // Do stuff with the object
+            Debug.Log("hit woo " + info.collider.name);
+        }
     }
 }
