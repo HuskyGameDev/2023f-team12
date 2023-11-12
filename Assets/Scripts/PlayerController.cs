@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float reach = 4f;
 
-    float cameraPitch = 0.0f;
+    public float cameraPitch = 0.0f;
     float velocityY = 0.0f;
     public CharacterController controller = null;
 
@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Static.Player = gameObject;
+        Static.Controller = this;
+
         controller = GetComponent<CharacterController>();
         if (lockCursor)
         {

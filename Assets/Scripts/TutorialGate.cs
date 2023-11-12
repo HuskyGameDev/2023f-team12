@@ -28,14 +28,23 @@ public class TutorialGate : MonoBehaviour
         switch (conditionToOpen)
         {
             case GateCondition.PickUp:
-                Item asItem = conditionReference?.GetComponent<Item>();
-                if (asItem is not null)
                 {
-                    asItem.OnPickUp += (_) => { conditionMet = true; };
+                    Item item = conditionReference?.GetComponent<Item>();
+                    if (item is not null)
+                    {
+                        item.OnPickUp += (_) => { conditionMet = true; };
+                    }
+                    break;
                 }
-                break;
             case GateCondition.Inspect:
-                break;
+                {
+                    Item item = conditionReference?.GetComponent<Item>();
+                    if (item is not null)
+                    {
+                        item.OnInspect += (_) => { conditionMet = true; };
+                    }
+                    break;
+                }
         }
     }
 
@@ -46,22 +55,16 @@ public class TutorialGate : MonoBehaviour
         {
             if (!finishedMoving)
             {
-                transform.Translate(new Vector3(endPos.x - startPos.x, endPos.y - startPos.y, endPos.z - startPos.z) * deltaTime / moveDuration);
+                transform.position = Vector3.Lerp(startPos, endPos, moveTime / moveDuration);
                 moveTime += deltaTime;
                 finishedMoving = moveTime >= moveDuration;
             }
         }
         else
         {
-            switch (conditionToOpen)
+            if (conditionToOpen == GateCondition.Move)
             {
-                case GateCondition.Move:
-                    conditionMet = conditionReference.GetComponent<PlayerController>().currentDirVelocity != Vector2.zero;
-                    break;
-                case GateCondition.PickUp:
-                    break;
-                case GateCondition.Inspect:
-                    break;
+                conditionMet = conditionReference.GetComponent<PlayerController>().currentDirVelocity != Vector2.zero;
             }
         }
     }

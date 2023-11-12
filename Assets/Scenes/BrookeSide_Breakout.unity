@@ -753,7 +753,7 @@ Transform:
   m_GameObject: {fileID: 187928621}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 8.71, y: 1.933, z: -4.868429}
+  m_LocalPosition: {x: 8.71, y: 2, z: -4.868429}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -806,6 +806,7 @@ MonoBehaviour:
   mouseSmoothTime: 0.03
   lockCursor: 1
   reach: 4
+  cameraPitch: 0
   controller: {fileID: 187928627}
   currentDir: {x: 0, y: 0}
   currentDirVelocity: {x: 0, y: 0}
@@ -3065,7 +3066,7 @@ MonoBehaviour:
   conditionToOpen: 0
   conditionReference: {fileID: 187928621}
   endPos: {x: 6.283, y: 1.424, z: -2.109}
-  moveDuration: 3
+  moveDuration: 1
 --- !u!1001 &1215460970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3508,7 +3509,7 @@ MonoBehaviour:
   conditionToOpen: 2
   conditionReference: {fileID: 1787039490}
   endPos: {x: -2.476, y: 1.424, z: -2.109}
-  moveDuration: 3
+  moveDuration: 1
 --- !u!1 &1437084779
 GameObject:
   m_ObjectHideFlags: 0
@@ -3885,7 +3886,7 @@ MonoBehaviour:
   conditionToOpen: 1
   conditionReference: {fileID: 1787039490}
   endPos: {x: 2, y: 1.424, z: -6.941}
-  moveDuration: 3
+  moveDuration: 1
 --- !u!1 &1614416974
 GameObject:
   m_ObjectHideFlags: 0
@@ -4475,6 +4476,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e962a475c1bab46b67ccc8d20c105c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickedUp: 0
+  inspecting: 0
 --- !u!1 &1829525934
 GameObject:
   m_ObjectHideFlags: 0
