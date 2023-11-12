@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class Static
 {
-    public static GameObject player;
+    public static GameObject Player;
 }

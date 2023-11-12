@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     Vector2 currentMouseDeltaVelocity = Vector2.zero;
     void Start()
     {
+        Static.Player = gameObject;
         controller = GetComponent<CharacterController>();
         if (lockCursor)
         {
@@ -37,8 +38,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Static.player = gameObject;
-
         // Deal with movement
         UpdateMouseLook();
         UpdateMovement();
@@ -92,8 +91,18 @@ public class PlayerController : MonoBehaviour
             if (info.distance > reach || info.collider.gameObject.layer != 6)
                 return;
 
+            GameObject obj = info.collider.gameObject;
+
             // Do stuff with the object
-            Debug.Log("hit woo " + info.collider.name);
+            if (Util.TryGetComponent<Item>(obj, out Item item))
+            {
+                item.TryPickUp();
+            }
+            else if (Util.TryGetComponent<Interactable>(obj, out Interactable interactable))
+            {
+                interactable.TryInteract();
+            }
+            // Debug.Log("hit woo " + info.collider.name);
         }
     }
 }

@@ -14,7 +14,7 @@ public class TutorialGate : MonoBehaviour
     [SerializeField] GateCondition conditionToOpen;
     [SerializeField] GameObject conditionReference;
     [SerializeField] Vector3 endPos;
-    [SerializeField] float moveDuration = 3f;
+    [SerializeField] float moveDuration = 1f;
 
     private bool conditionMet = false;
     private bool finishedMoving = false;
@@ -24,6 +24,19 @@ public class TutorialGate : MonoBehaviour
     void Start()
     {
         startPos = gameObject.transform.position;
+        
+        switch (conditionToOpen)
+        {
+            case GateCondition.PickUp:
+                Item asItem = conditionReference?.GetComponent<Item>();
+                if (asItem is not null)
+                {
+                    asItem.OnPickUp += (_) => { conditionMet = true; };
+                }
+                break;
+            case GateCondition.Inspect:
+                break;
+        }
     }
 
     void Update()
