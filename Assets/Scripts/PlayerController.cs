@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Static.player = gameObject;
+
         // Deal with movement
         UpdateMouseLook();
         UpdateMovement();
