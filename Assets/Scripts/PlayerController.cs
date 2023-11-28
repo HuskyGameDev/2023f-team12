@@ -45,27 +45,51 @@ public class PlayerController : MonoBehaviour
         UpdateMovement();
 
         // Deal with interacting/picking up objects
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            TryInteract();
+            OnClick(false);
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            OnClick(true);
+        }
+
+        // Switching things in the inventory
     }
 
     void UpdateMouseLook()
     {
         Vector2 targetMouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-
         currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, targetMouseDelta, ref currentMouseDeltaVelocity, mouseSmoothTime);
-        cameraPitch -= currentMouseDelta.y * mouseSensitivity;
-        cameraPitch = Mathf.Clamp(cameraPitch, -90.0f, 90.0f);
+        
+        if (Inspecting)
+        {
+            // While inspecting, rotate the held object if mouse is held
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            if (Input.GetMouseButton(0))
+            {
+                HeldItem.transform.Rotate(Vector3.up * -currentMouseDelta.x * mouseSensitivity + Vector3.right * -currentMouseDelta.y * mouseSensitivity);
+            }
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
-        playerCamera.localEulerAngles = Vector3.right * cameraPitch;
-        transform.Rotate(Vector3.up * currentMouseDelta.x * mouseSensitivity);
+            // While not inspecting, rotate the camera
+            cameraPitch -= currentMouseDelta.y * mouseSensitivity;
+            cameraPitch = Mathf.Clamp(cameraPitch, -90.0f, 90.0f);
+
+            playerCamera.localEulerAngles = Vector3.right * cameraPitch;
+            transform.Rotate(Vector3.up * currentMouseDelta.x * mouseSensitivity);
+        }
     }
 
     void UpdateMovement()
     {
-        Vector2 targetDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        // Movement set to 0 when inspecting so we don't move while looking at object
+        Vector2 targetDir = Inspecting ? Vector2.zero : new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         targetDir.Normalize();
 
         currentDir = Vector2.SmoothDamp(currentDir, targetDir, ref currentDirVelocity, smoothMoveTime);
@@ -80,31 +104,92 @@ public class PlayerController : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-    void TryInteract()
+    void OnClick(bool rightClick)
     {
-        // Create raycast
-        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
-        RaycastHit info;
-        bool result = Physics.Raycast(ray, out info);
-        if (result)
+        if (rightClick)
         {
-            // Filter out anything we don't want
-            // Interactable layer id is 6
-            if (info.distance > reach || info.collider.gameObject.layer != 6)
-                return;
+            Inspecting = !Inspecting;
+        }
+        else if (Inspecting)
+        {
+            // We are inspecting, interact with the object in our hand
+        }
+        else
+        {
+            // We are not inspecting, therefore we can look for objects to pick up.
 
-            GameObject obj = info.collider.gameObject;
+            // Create raycast
+            Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+            RaycastHit info;
+            bool result = Physics.Raycast(ray, out info);
+            if (result)
+            {
+                // Filter out anything we don't want
+                // Interactable layer id is 6
+                if (info.distance > reach || info.collider.gameObject.layer != 6)
+                    return;
 
-            // Do stuff with the object
-            if (Util.TryGetComponent<Item>(obj, out Item item))
-            {
-                item.TryPickUp();
+                GameObject obj = info.collider.gameObject;
+
+                // Do stuff with the object
+                if (!HoldingItem && Util.TryGetComponent<Item>(obj, out Item item))
+                {
+                    item.PickUp();
+                    HeldItem = item;
+                }
+                else if (Util.TryGetComponent<Interactable>(obj, out Interactable interactable))
+                {
+                    interactable.Interact(HeldItem);
+                }
             }
-            else if (Util.TryGetComponent<Interactable>(obj, out Interactable interactable))
+            else if (HoldingItem)
             {
-                interactable.TryInteract();
+                // Set down item
+                HeldItem.SetDown();
+                HeldItem = null;
             }
-            // Debug.Log("hit woo " + info.collider.name);
+        }
+    }
+
+    private Item HeldItem
+    {
+        get
+        {
+            return Static.Inventory[Static.HeldItem];
+        }
+        set
+        {
+            Static.Inventory[Static.HeldItem] = value;
+        }
+    }
+
+    private bool HoldingItem
+    {
+        get
+        {
+            return HeldItem is not null;
+        }
+    }
+    
+    private bool Inspecting
+    {
+        get
+        {
+            return HoldingItem && HeldItem.inspecting;
+        }
+        set
+        {
+            if (HoldingItem)
+            {
+                if(value)
+                {
+                    HeldItem.Inspect();
+                }
+                else
+                {
+                    HeldItem.StopInspecting();
+                }
+            }
         }
     }
 }

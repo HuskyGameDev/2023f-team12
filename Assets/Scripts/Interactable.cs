@@ -6,21 +6,15 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    void Start() { }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Update() { }
 
-    public void TryInteract()
+    public void Interact(Item heldItem)
     {
         OnInteractEventArgs args = new();
-        args.HeldObject = Static.Player; // todo: get held object and stuff
+        args.HeldObject = heldItem?.gameObject; // todo: get held object and stuff
 
         EventHandler<OnInteractEventArgs> handler = OnInteract;
         handler(this, args);
