@@ -17,7 +17,7 @@ public class Interactable : MonoBehaviour
         args.HeldObject = heldItem?.gameObject; // todo: get held object and stuff
 
         EventHandler<OnInteractEventArgs> handler = OnInteract;
-        handler(this, args);
+        handler?.Invoke(this, args);
     }
 
     public event EventHandler<OnInteractEventArgs> OnInteract;

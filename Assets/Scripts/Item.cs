@@ -24,12 +24,13 @@ public class Item : Interactable
     {
         if (pickedUp)
         {
+            // If you do not understand this math, don't worry. I don't either and I wrote the damn thing.
             float hLookAngle = (Static.Controller.transform.rotation.eulerAngles.y) * -Mathf.Deg2Rad;
             float vLookAngle = Static.Controller.cameraPitch * -Mathf.Deg2Rad;
             Vector3 offset;
             if (inspecting)
             {
-                offset = new Vector3(Mathf.Cos(hLookAngle + INSP_ANGLE) * Mathf.Cos(vLookAngle) * ITEM_H_OFFSET, Mathf.Sin(vLookAngle) * 0.5f + 0.45f, Mathf.Sin(hLookAngle + INSP_ANGLE) * Mathf.Cos(vLookAngle) * ITEM_H_OFFSET);
+                offset = new Vector3(Mathf.Cos(hLookAngle + INSP_ANGLE) * Mathf.Cos(vLookAngle) * ITEM_H_OFFSET, Mathf.Sin(vLookAngle) * 0.5f + ITEM_V_OFFSET, Mathf.Sin(hLookAngle + INSP_ANGLE) * Mathf.Cos(vLookAngle) * ITEM_H_OFFSET);
                 transform.position = Vector3.Lerp(transform.position, Static.Player.transform.position + offset, MOVE_SPEED * Time.deltaTime);
             }
             else
@@ -45,15 +46,17 @@ public class Item : Interactable
     {
         pickedUp = true;
         GetComponent<BoxCollider>().enabled = false;
+        GetComponent<Rigidbody>().useGravity = false;
 
         Action<Item> handler = OnPickUp;
-        handler(this);
+        handler?.Invoke(this);
     }
 
     public void SetDown()
     {
         pickedUp = false;
         GetComponent<BoxCollider>().enabled = true;
+        GetComponent<Rigidbody>().useGravity = true;
     }
 
     public void Inspect()
@@ -62,7 +65,7 @@ public class Item : Interactable
         inspecting = true;
 
         Action<Item> handler = OnInspect;
-        handler(this);
+        handler?.Invoke(this);
     }
     public void StopInspecting()
     {

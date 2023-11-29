@@ -122,12 +122,10 @@ public class PlayerController : MonoBehaviour
             Ray ray = new Ray(playerCamera.position, playerCamera.forward);
             RaycastHit info;
             bool result = Physics.Raycast(ray, out info);
-            if (result)
+
+            // Make sure we hit something, it's within reach, and it is part of the interactable layer.
+            if (result && info.distance < reach && info.collider.gameObject.layer == 6)
             {
-                // Filter out anything we don't want
-                // Interactable layer id is 6
-                if (info.distance > reach || info.collider.gameObject.layer != 6)
-                    return;
 
                 GameObject obj = info.collider.gameObject;
 
