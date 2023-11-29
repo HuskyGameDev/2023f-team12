@@ -49,6 +49,7 @@ public static class Global
             Level.One => "Room1",
             _ => throw new NotImplementedException()
         };
+        Debug.Log(name);
 
         for (int i = 0; i < InventorySize; i++)
         {
@@ -56,11 +57,13 @@ public static class Global
         }
         SceneManager.LoadScene(name, LoadSceneMode.Single);
 
-        //Scene newScene = SceneManager.GetSceneByName(name);
-        //SceneManager.SetActiveScene(newScene);
+        // Scene newScene = SceneManager.GetSceneByName(name);
+        // SceneManager.SetActiveScene(newScene);
+        // SceneManager.UnloadScene(currScene);
+
+        Debug.Log(SceneManager.GetActiveScene().name);
         // MoveInventoryToScene(newScene);
 
-        //SceneManager.UnloadScene(currScene);
     }
 
     public static void MoveInventoryToScene(Scene scene)

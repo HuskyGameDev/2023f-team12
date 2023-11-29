@@ -8,7 +8,7 @@ public class TutorialDoor : MonoBehaviour
     {
         GetComponent<Interactable>().OnInteract += (self, args) =>
         {
-            if (args.HeldObject.name == "Key_inprogress")
+            if (args.HeldObject?.name == "Key_inprogress")
             {
                 Global.LoadNewLevel(Level.One);
             }
