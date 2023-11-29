@@ -2540,7 +2540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 672632068}
-  mouseSensitivity: 1
+  mouseSensitivity: 1.5
   walkSpeed: 6
   gravity: -13
   smoothMoveTime: 0.3

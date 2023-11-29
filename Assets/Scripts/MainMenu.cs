@@ -1,21 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
 
-    public string Tutorial;
+    public Level StartLevel;
+
+    public Button startButton;
+    public Button optsButton;
+    public Button quitButton;
 
     public GameObject OptionsScreen;
-    // Start is called before the first frame update
+
     void Start()
     {
-
+        startButton.onClick.AddListener(StartGame);
+        optsButton.onClick.AddListener(OpenOptions);
+        quitButton.onClick.AddListener(QuitGame);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
 
@@ -23,7 +30,8 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(Tutorial);
+        // SceneManager.LoadScene(Tutorial);
+        Global.LoadNewLevel(StartLevel);
     }
 
     public void OpenOptions()

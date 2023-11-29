@@ -41,7 +41,7 @@ public static class Global
 
     public static void LoadNewLevel(Level level)
     {
-        Scene currScene = SceneManager.GetActiveScene();
+        // Scene currScene = SceneManager.GetActiveScene();
 
         string name = level switch
         {
@@ -60,7 +60,7 @@ public static class Global
         //SceneManager.SetActiveScene(newScene);
         // MoveInventoryToScene(newScene);
 
-        //SceneManager.UnloadSceneAsync(currScene);
+        //SceneManager.UnloadScene(currScene);
     }
 
     public static void MoveInventoryToScene(Scene scene)
