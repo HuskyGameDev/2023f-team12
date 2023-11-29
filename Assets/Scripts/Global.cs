@@ -41,20 +41,26 @@ public static class Global
 
     public static void LoadNewLevel(Level level)
     {
-        Scene currScene = SceneManager.GetActiveScene();
+        // Scene currScene = SceneManager.GetActiveScene();
 
         string name = level switch
         {
             Level.Tutorial => "Tutorial",
+            Level.One => "Room1",
             _ => throw new NotImplementedException()
         };
-        SceneManager.LoadScene(name, LoadSceneMode.Additive);
 
-        Scene newScene = SceneManager.GetSceneByName(name);
-        SceneManager.SetActiveScene(newScene);
+        for (int i = 0; i < InventorySize; i++)
+        {
+            Inventory[i] = null;
+        }
+        SceneManager.LoadScene(name, LoadSceneMode.Single);
+
+        //Scene newScene = SceneManager.GetSceneByName(name);
+        //SceneManager.SetActiveScene(newScene);
         // MoveInventoryToScene(newScene);
 
-        SceneManager.UnloadSceneAsync(currScene);
+        //SceneManager.UnloadScene(currScene);
     }
 
     public static void MoveInventoryToScene(Scene scene)
