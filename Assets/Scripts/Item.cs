@@ -7,6 +7,8 @@ public class Item : Interactable
 {
     public bool pickedUp;
     public bool inspecting;
+    private bool hasPhysics;
+    private Vector3 startPos;
 
     private const float MOVE_SPEED = 15f;
     private const float ROT_SPEED = 15f;
@@ -14,10 +16,12 @@ public class Item : Interactable
     private const float ITEM_V_OFFSET = 0.4f;
     private const float HOLD_ANGLE = 60f * Mathf.Deg2Rad;
     private const float INSP_ANGLE = 90f * Mathf.Deg2Rad;
+    private const float FALL_SPEED_THRESH = 50f; // assuming gravity isn't changed elsewhere, should equate to falling for about 5 seconds
 
     void Start()
     {
-        //
+        hasPhysics = Util.TryGetComponent<Rigidbody>(gameObject, out _);
+        startPos = transform.position;
     }
 
     void Update()
@@ -40,13 +44,22 @@ public class Item : Interactable
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Static.Player.transform.position - new Vector3(transform.position.x, Static.Player.transform.position.y, transform.position.z)), ROT_SPEED * Time.deltaTime);
             }
         }
+        else if (hasPhysics)
+        {
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (Mathf.Abs(rb.velocity.y) > FALL_SPEED_THRESH)
+            {
+                transform.position = startPos;
+                rb.velocity = Vector3.zero;
+            }
+        }
     }
 
     public void PickUp()
     {
         pickedUp = true;
         GetComponent<BoxCollider>().enabled = false;
-        GetComponent<Rigidbody>().useGravity = false;
+        if (hasPhysics) GetComponent<Rigidbody>().useGravity = false;
 
         Action<Item> handler = OnPickUp;
         handler?.Invoke(this);
@@ -56,7 +69,7 @@ public class Item : Interactable
     {
         pickedUp = false;
         GetComponent<BoxCollider>().enabled = true;
-        GetComponent<Rigidbody>().useGravity = true;
+        if (hasPhysics) GetComponent<Rigidbody>().useGravity = true;
     }
 
     public void Inspect()

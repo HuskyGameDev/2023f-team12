@@ -69,7 +69,10 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             if (Input.GetMouseButton(0))
             {
-                HeldItem.transform.Rotate(Vector3.up * -currentMouseDelta.x * mouseSensitivity + Vector3.right * -currentMouseDelta.y * mouseSensitivity);
+                float lookAngle = transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
+                HeldItem.transform.RotateAround(HeldItem.transform.position, Vector3.up, -currentMouseDelta.x * mouseSensitivity);
+                HeldItem.transform.RotateAround(HeldItem.transform.position, (Vector3.right * -Mathf.Cos(lookAngle) + Vector3.forward * Mathf.Sin(lookAngle)).normalized, -currentMouseDelta.y * mouseSensitivity);
+                //HeldItem.transform.Rotate(Vector3.up * -currentMouseDelta.x * mouseSensitivity + Vector3.right * -currentMouseDelta.y * mouseSensitivity);
             }
         }
         else
