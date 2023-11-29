@@ -29,19 +29,19 @@ public class Item : Interactable
         if (pickedUp)
         {
             // If you do not understand this math, don't worry. I don't either and I wrote the damn thing.
-            float hLookAngle = (Static.Controller.transform.rotation.eulerAngles.y) * -Mathf.Deg2Rad;
-            float vLookAngle = Static.Controller.cameraPitch * -Mathf.Deg2Rad;
+            float hLookAngle = (Global.Controller.transform.rotation.eulerAngles.y) * -Mathf.Deg2Rad;
+            float vLookAngle = Global.Controller.cameraPitch * -Mathf.Deg2Rad;
             Vector3 offset;
             if (inspecting)
             {
                 offset = new Vector3(Mathf.Cos(hLookAngle + INSP_ANGLE) * Mathf.Cos(vLookAngle) * ITEM_H_OFFSET, Mathf.Sin(vLookAngle) * 0.5f + ITEM_V_OFFSET, Mathf.Sin(hLookAngle + INSP_ANGLE) * Mathf.Cos(vLookAngle) * ITEM_H_OFFSET);
-                transform.position = Vector3.Lerp(transform.position, Static.Player.transform.position + offset, MOVE_SPEED * Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, Global.Player.transform.position + offset, MOVE_SPEED * Time.deltaTime);
             }
             else
             {
                 offset = new Vector3(Mathf.Cos(hLookAngle + HOLD_ANGLE) * Mathf.Cos(vLookAngle * 0.5f) * ITEM_H_OFFSET, Mathf.Sin(vLookAngle) * 0.625f + ITEM_V_OFFSET, Mathf.Sin(hLookAngle + HOLD_ANGLE) * Mathf.Cos(vLookAngle * 0.5f) * ITEM_H_OFFSET);
-                transform.position = Vector3.Lerp(transform.position, Static.Player.transform.position + offset, MOVE_SPEED * Time.deltaTime);
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Static.Player.transform.position - new Vector3(transform.position.x, Static.Player.transform.position.y, transform.position.z)), ROT_SPEED * Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, Global.Player.transform.position + offset, MOVE_SPEED * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Global.Player.transform.position - new Vector3(transform.position.x, Global.Player.transform.position.y, transform.position.z)), ROT_SPEED * Time.deltaTime);
             }
         }
         else if (hasPhysics)

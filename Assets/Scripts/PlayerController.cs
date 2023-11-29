@@ -26,8 +26,8 @@ public class PlayerController : MonoBehaviour
     Vector2 currentMouseDeltaVelocity = Vector2.zero;
     void Start()
     {
-        Static.Player = gameObject;
-        Static.Controller = this;
+        Global.Player = gameObject;
+        Global.Controller = this;
 
         controller = GetComponent<CharacterController>();
         if (lockCursor)
@@ -54,7 +54,18 @@ public class PlayerController : MonoBehaviour
             OnClick(true);
         }
 
-        // Switching things in the inventory
+        // Switching things in the inventory (only do when not inspecting)
+        if (!Inspecting)
+        {
+            if (Input.mouseScrollDelta.y > 0f)
+            {
+                Global.NextItem();
+            }
+            else if (Input.mouseScrollDelta.y < 0f)
+            {
+                Global.PrevItem();
+            }
+        }
     }
 
     void UpdateMouseLook()
@@ -156,11 +167,11 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            return Static.Inventory[Static.HeldItem];
+            return Global.Inventory[Global.HeldItem];
         }
         set
         {
-            Static.Inventory[Static.HeldItem] = value;
+            Global.Inventory[Global.HeldItem] = value;
         }
     }
 
