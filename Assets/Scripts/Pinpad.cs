@@ -82,7 +82,7 @@ public class Pinpad : MonoBehaviour
     void Update()
     {
         // Check if pinpad is at max length
-        if (SubmitKey != null && enteredCombo.Count == Combination.Length)
+        if (SubmitKey == null && enteredCombo.Count == Combination.Length)
         {
             // Process it after a delay for suspense reasons
             processingTime += Time.deltaTime;
