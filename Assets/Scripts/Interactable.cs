@@ -22,9 +22,9 @@ public class Interactable : MonoBehaviour
 
     public event EventHandler<OnInteractEventArgs> OnInteract;
 
-}
 
-public class OnInteractEventArgs : EventArgs
-{
-    public GameObject HeldObject { get; set; }
+    public class OnInteractEventArgs : EventArgs
+    {
+        public GameObject HeldObject { get; set; }
+    }
 }
