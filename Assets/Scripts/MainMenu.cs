@@ -17,9 +17,13 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        // Assign functionality to menu
         startButton.onClick.AddListener(StartGame);
         optsButton.onClick.AddListener(OpenOptions);
         quitButton.onClick.AddListener(QuitGame);
+
+        // Assign functionality to options screen
+        Util.GetChildOf(OptionsScreen, "Close").GetComponent<Button>().onClick.AddListener(CloseOptions);
     }
 
 

@@ -9,4 +9,13 @@ public static class Util
         result = obj.GetComponent<T>();
         return result is not null;
     }
+    public static bool HasComponent<T>(GameObject obj)
+    {
+        return obj.GetComponent<T>() is not null;
+    }
+
+    public static GameObject GetChildOf(GameObject parent, string name)
+    {
+        return parent.transform.Find(name).gameObject;
+    }
 }

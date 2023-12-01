@@ -20,7 +20,7 @@ public class Item : Interactable
 
     void Start()
     {
-        hasPhysics = Util.TryGetComponent<Rigidbody>(gameObject, out _);
+        hasPhysics = Util.HasComponent<Rigidbody>(gameObject);
         startPos = transform.position;
     }
 
