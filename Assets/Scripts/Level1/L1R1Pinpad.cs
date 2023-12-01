@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class L1R1Pinpad : Pinpad
+public class L1R1Pinpad : MonoBehaviour
 {
     void Start()
     {
-        OnSuccess += () =>
-        {
-            Debug.Log("WOOHOO");
-        };
-        OnFail += () =>
-        {
-            Debug.Log("GRAAAHHHHHH");
-        };
+        Pinpad p = GetComponent<Pinpad>();
+        
+        p.OnKeyPress += (_, args) => { Debug.Log(args.Id); };
+        p.OnSuccess += () => { Debug.Log("WOOHOO"); };
+        p.OnFail += () => { Debug.Log("GRAAAHHHHHH"); };
     }
 }
