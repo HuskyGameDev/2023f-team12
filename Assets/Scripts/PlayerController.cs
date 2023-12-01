@@ -66,6 +66,12 @@ public class PlayerController : MonoBehaviour
                 Global.PrevItem();
             }
         }
+
+        // Temp solution until pause menu: escape quits game
+        if (Input.GetKeyDown("escape"))
+        {
+            Application.Quit();
+        }
     }
 
     void UpdateMouseLook()
