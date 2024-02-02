@@ -22,12 +22,15 @@ public class PlayerController : MonoBehaviour
     public Vector2 currentDir = Vector2.zero;
     public Vector2 currentDirVelocity = Vector2.zero;
 
+    private GameObject crosshair;
+
     Vector2 currentMouseDelta = Vector2.zero;
     Vector2 currentMouseDeltaVelocity = Vector2.zero;
     void Start()
     {
         Global.Player = gameObject;
         Global.Controller = this;
+        crosshair = GameObject.Find("Crosshair");
 
         controller = GetComponent<CharacterController>();
         if (lockCursor)
@@ -129,6 +132,7 @@ public class PlayerController : MonoBehaviour
         if (rightClick)
         {
             Inspecting = !Inspecting;
+            crosshair?.SetActive(!Inspecting);
         }
         else if (Inspecting)
         {
