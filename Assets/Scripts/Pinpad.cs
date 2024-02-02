@@ -9,7 +9,7 @@ using UnityEngine;
  * - Set up the Pinpad component:
  *     - In the Keys property, add each key object, in order.
  *     - In the Combination property, add a combination, in order. Each number refers to the index of the key in the Keys property, not the actual pin.
- *     - Optionally, specify a submit key, reset code key and a screen to display the pin.
+ *     - Optionally, specify a submit and/or reset code key.
  *         - If submit key is not specified, the pin pad will automatically check the code when all digits are entered.
  * - Create a script for the object.
  *     - In the Start() method, get the Pinpad component.
