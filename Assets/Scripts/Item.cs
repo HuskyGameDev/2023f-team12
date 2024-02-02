@@ -13,7 +13,8 @@ public class Item : Interactable
     private const float MOVE_SPEED = 15f;
     private const float ROT_SPEED = 15f;
     private const float ITEM_H_OFFSET = 0.75f;
-    private const float ITEM_V_OFFSET = 0.4f;
+    private const float ITEM_V_OFFSET_HOLD = 0.6f;
+    private const float ITEM_V_OFFSET_INSP = 0.85f;
     private const float HOLD_ANGLE = 60f * Mathf.Deg2Rad;
     private const float INSP_ANGLE = 90f * Mathf.Deg2Rad;
     private const float FALL_SPEED_THRESH = 50f; // assuming gravity isn't changed elsewhere, should equate to falling for about 5 seconds
@@ -34,12 +35,12 @@ public class Item : Interactable
             Vector3 offset;
             if (inspecting)
             {
-                offset = new Vector3(Mathf.Cos(hLookAngle + INSP_ANGLE) * Mathf.Cos(vLookAngle) * ITEM_H_OFFSET, Mathf.Sin(vLookAngle) * 0.5f + ITEM_V_OFFSET, Mathf.Sin(hLookAngle + INSP_ANGLE) * Mathf.Cos(vLookAngle) * ITEM_H_OFFSET);
+                offset = new Vector3(Mathf.Cos(hLookAngle + INSP_ANGLE) * Mathf.Cos(vLookAngle) * ITEM_H_OFFSET, Mathf.Sin(vLookAngle) * 0.65f + ITEM_V_OFFSET_INSP, Mathf.Sin(hLookAngle + INSP_ANGLE) * Mathf.Cos(vLookAngle) * ITEM_H_OFFSET);
                 transform.position = Vector3.Lerp(transform.position, Global.Player.transform.position + offset, MOVE_SPEED * Time.deltaTime);
             }
             else
             {
-                offset = new Vector3(Mathf.Cos(hLookAngle + HOLD_ANGLE) * Mathf.Cos(vLookAngle * 0.5f) * ITEM_H_OFFSET, Mathf.Sin(vLookAngle) * 0.625f + ITEM_V_OFFSET, Mathf.Sin(hLookAngle + HOLD_ANGLE) * Mathf.Cos(vLookAngle * 0.5f) * ITEM_H_OFFSET);
+                offset = new Vector3(Mathf.Cos(hLookAngle + HOLD_ANGLE) * Mathf.Cos(vLookAngle * 0.5f) * ITEM_H_OFFSET, Mathf.Sin(vLookAngle) * 0.625f + ITEM_V_OFFSET_HOLD, Mathf.Sin(hLookAngle + HOLD_ANGLE) * Mathf.Cos(vLookAngle * 0.5f) * ITEM_H_OFFSET);
                 transform.position = Vector3.Lerp(transform.position, Global.Player.transform.position + offset, MOVE_SPEED * Time.deltaTime);
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Global.Player.transform.position - new Vector3(transform.position.x, Global.Player.transform.position.y, transform.position.z)), ROT_SPEED * Time.deltaTime);
             }
