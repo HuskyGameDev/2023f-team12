@@ -20,7 +20,6 @@ public class Pinpad : MonoBehaviour
 {
     private const float PROCESSING_TOTAL_TIME = 0.75f;
 
-    public GameObject Screen;
     public GameObject SubmitKey;
     public GameObject ResetKey;
     public GameObject[] Keys;
