@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private const float MOUSE_MOVE_THRESH = 10f; // pixels
     [SerializeField] public Transform playerCamera = null;
     [SerializeField] float mouseSensitivity = 1f;
     [SerializeField] float walkSpeed = 6.0f;
@@ -14,10 +15,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool lockCursor = true;
 
     [SerializeField] float reach = 4f;
+    [SerializeField] float inspectReach = 1f;
 
     public float cameraPitch = 0.0f;
     float velocityY = 0.0f;
     public CharacterController controller = null;
+    private Vector2 beginClick;
 
     public Vector2 currentDir = Vector2.zero;
     public Vector2 currentDirVelocity = Vector2.zero;
@@ -50,9 +53,13 @@ public class PlayerController : MonoBehaviour
         // Deal with interacting/picking up objects
         if (Input.GetMouseButtonDown(0))
         {
+            beginClick = new(Input.mousePosition.x, Input.mousePosition.y);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
             OnClick(false);
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonUp(1))
         {
             OnClick(true);
         }
@@ -92,7 +99,6 @@ public class PlayerController : MonoBehaviour
                 float lookAngle = transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
                 HeldItem.transform.RotateAround(HeldItem.transform.position, Vector3.up, -currentMouseDelta.x * mouseSensitivity);
                 HeldItem.transform.RotateAround(HeldItem.transform.position, (Vector3.right * -Mathf.Cos(lookAngle) + Vector3.forward * Mathf.Sin(lookAngle)).normalized, -currentMouseDelta.y * mouseSensitivity);
-                //HeldItem.transform.Rotate(Vector3.up * -currentMouseDelta.x * mouseSensitivity + Vector3.right * -currentMouseDelta.y * mouseSensitivity);
             }
         }
         else
@@ -131,12 +137,24 @@ public class PlayerController : MonoBehaviour
     {
         if (rightClick)
         {
+            // Right click toggles inspecting
             Inspecting = !Inspecting;
             crosshair?.SetActive(!Inspecting);
         }
         else if (Inspecting)
         {
             // We are inspecting, interact with the object in our hand
+            if (Vector2.Distance(beginClick, Input.mousePosition) < MOUSE_MOVE_THRESH)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit info;
+                bool result = Physics.Raycast(ray, out info);
+
+                if (result && info.distance < inspectReach && info.collider.gameObject.layer == 6) // todo: change to 7
+                {
+                    Debug.Log("AAAAA");
+                }
+            }
         }
         else
         {

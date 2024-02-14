@@ -757,6 +757,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickedUp: 0
   inspecting: 0
+  holdOffset: 0.75
+  inspectOffset: 0.75
 --- !u!65 &241341566
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2577,6 +2579,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickedUp: 0
   inspecting: 0
+  holdOffset: 0.75
+  inspectOffset: 0.75
 --- !u!54 &1787039496
 Rigidbody:
   m_ObjectHideFlags: 0
