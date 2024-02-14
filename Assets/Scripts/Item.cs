@@ -60,7 +60,8 @@ public class Item : Interactable
     public void PickUp()
     {
         pickedUp = true;
-        GetComponent<BoxCollider>().enabled = false;
+        //GetComponent<BoxCollider>().enabled = false;
+        GetComponent<BoxCollider>().excludeLayers = GetComponent<BoxCollider>().excludeLayers.value | Util.LayerMask(2);
         if (hasPhysics) GetComponent<Rigidbody>().useGravity = false;
 
         Action<Item> handler = OnPickUp;
@@ -70,7 +71,8 @@ public class Item : Interactable
     public void SetDown()
     {
         pickedUp = false;
-        GetComponent<BoxCollider>().enabled = true;
+        //GetComponent<BoxCollider>().enabled = true;
+        GetComponent<BoxCollider>().excludeLayers = GetComponent<BoxCollider>().excludeLayers.value & ~Util.LayerMask(2);
         if (hasPhysics) GetComponent<Rigidbody>().useGravity = true;
     }
 

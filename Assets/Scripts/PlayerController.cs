@@ -157,12 +157,8 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("BBBBBB");
+                    Debug.Log(info.collider.gameObject);
                 }
-            }
-            else if (cam == null)
-            {
-                Debug.Log("CCCCC");
             }
         }
         else
