@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class L1R1Pinpad : MonoBehaviour
 {
+
+    [SerializeField] GameObject door;
+
     void Start()
     {
         Pinpad p = GetComponent<Pinpad>();
         
-        p.OnKeyPress += (_, args) => { Debug.Log(args.Id); };
-        p.OnSuccess += () => { Debug.Log("WOOHOO"); };
-        p.OnFail += () => { Debug.Log("GRAAAHHHHHH"); };
+        p.OnSuccess += () => {
+            Debug.Log("WOOHOO");
+        };
     }
 }
