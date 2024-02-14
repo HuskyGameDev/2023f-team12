@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public float cameraPitch = 0.0f;
     float velocityY = 0.0f;
     public CharacterController controller = null;
-    private Vector2 beginClick;
+    private Vector3 beginClick;
 
     public Vector2 currentDir = Vector2.zero;
     public Vector2 currentDirVelocity = Vector2.zero;
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         // Deal with interacting/picking up objects
         if (Input.GetMouseButtonDown(0))
         {
-            beginClick = new(Input.mousePosition.x, Input.mousePosition.y);
+            beginClick = Input.mousePosition;
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -144,16 +144,25 @@ public class PlayerController : MonoBehaviour
         else if (Inspecting)
         {
             // We are inspecting, interact with the object in our hand
-            if (Vector2.Distance(beginClick, Input.mousePosition) < MOUSE_MOVE_THRESH)
+            Camera cam = null;
+            if (Vector3.Distance(beginClick, Input.mousePosition) < MOUSE_MOVE_THRESH && Util.TryGetComponent<Camera>(playerCamera.gameObject, out cam))
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
                 RaycastHit info;
                 bool result = Physics.Raycast(ray, out info);
 
-                if (result && info.distance < inspectReach && info.collider.gameObject.layer == 6) // todo: change to 7
+                if (result && info.distance < inspectReach && info.collider.gameObject.layer == 7)
                 {
                     Debug.Log("AAAAA");
                 }
+                else
+                {
+                    Debug.Log("BBBBBB");
+                }
+            }
+            else if (cam == null)
+            {
+                Debug.Log("CCCCC");
             }
         }
         else
