@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 3.6.5 commit date:2023-10-16, commit time:14:30, hash:cf1e1ed46b7e</authoring_tool>
+    </contributor>
+    <created>2024-02-19T14:13:22</created>
+    <modified>2024-02-19T14:13:22</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="Material_001-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">0 0 0 1</color>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material_002-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">0.8410848 0.8688841 0.04646634 1</color>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images/>
+  <library_materials>
+    <material id="Material_001-material" name="Material.001">
+      <instance_effect url="#Material_001-effect"/>
+    </material>
+    <material id="Material_002-material" name="Material.002">
+      <instance_effect url="#Material_002-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Circle-mesh" name="Circle">
+      <mesh>
+        <source id="Circle-mesh-positions">
+          <float_array id="Circle-mesh-positions-array" count="72">0 1 -0.0228095 -0.8660254 -0.4999999 -0.0228095 0.8660254 -0.4999999 -0.0228095 -0.7184523 -0.4147986 -0.0228095 0 0.8295973 -0.0228095 0.7184523 -0.4147985 -0.0228095 -0.7697986 -0.4444433 -0.0228095 0 0.8888869 -0.0228095 0.7697986 -0.4444433 -0.0228095 -0.7184523 -0.4147986 -0.01280951 0 0.8295973 -0.01280951 0.7184523 -0.4147985 -0.01280951 -0.7697986 -0.4444433 0.00219047 0 0.8888869 0.00219047 0.7697986 -0.4444433 0.00219047 -0.7184523 -0.4147986 0.00219047 0 0.8295973 0.00219047 0.7184523 -0.4147985 0.00219047 -0.7697986 -0.4444433 0.02719044 0 0.8888869 0.02719044 0.7697986 -0.4444433 0.02719044 -0.8660254 -0.4999999 0.02719044 0 1 0.02719044 0.8660254 -0.4999999 0.02719044</float_array>
+          <technique_common>
+            <accessor source="#Circle-mesh-positions-array" count="24" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Circle-mesh-normals">
+          <float_array id="Circle-mesh-normals-array" count="72">0.8863 0.4631117 0 0.7205812 -0.4160199 0.5546983 -0.08893191 -0.9960377 0 0.7949513 -0.6066734 0 -0.2488506 0.1436738 0.9578264 0.1080592 0.9941446 0 -0.8660253 -0.5000001 0 0 0.8320502 0.5547003 -1.51782e-7 1 0 0.7205747 -0.4160241 0.5547037 0.866025 -0.5000008 0 -0.9146866 -0.4041638 0 0.7205757 -0.4160274 0.5546999 -0.9323313 0.3616051 0 -0.2488506 0.1436735 0.9578264 -0.7205785 -0.4160234 0.5546993 -0.7205758 -0.4160278 0.5546994 -6.8717e-6 0.8320515 0.5546984 -1.5265e-7 -0.2873478 0.9578264 0.2488507 0.1436738 0.9578264 2.39853e-6 0.83205 0.5547008 0 -0.2873478 0.9578264 -0.7205755 -0.4160254 0.5547018 0.2488504 0.1436739 0.9578264</float_array>
+          <technique_common>
+            <accessor source="#Circle-mesh-normals-array" count="24" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Circle-mesh-map-0">
+          <float_array id="Circle-mesh-map-0-array" count="258">0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</float_array>
+          <technique_common>
+            <accessor source="#Circle-mesh-map-0-array" count="129" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Circle-mesh-vertices">
+          <input semantic="POSITION" source="#Circle-mesh-positions"/>
+        </vertices>
+        <triangles material="Material_001-material" count="42">
+          <input semantic="VERTEX" source="#Circle-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Circle-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Circle-mesh-map-0" offset="2" set="0"/>
+          <p>4 0 0 11 1 1 5 2 2 6 3 3 20 4 4 8 5 5 1 6 6 22 7 7 0 8 8 0 8 9 23 9 10 2 10 11 7 11 12 14 12 13 8 5 14 3 13 15 17 14 16 5 2 17 8 5 18 12 15 19 6 3 20 5 2 24 9 16 25 3 13 26 3 13 27 10 17 28 4 0 29 16 18 30 12 15 31 15 19 32 15 19 33 14 12 34 17 14 35 16 18 36 14 12 37 13 20 38 5 2 39 16 18 40 4 0 41 6 3 42 13 20 43 7 11 44 4 0 45 15 19 46 3 13 47 19 21 48 21 22 49 18 23 50 18 23 51 23 9 52 20 4 53 19 21 54 23 9 55 22 7 56 2 10 57 21 22 58 1 6 59 8 5 60 19 21 61 7 11 62 7 11 63 18 23 64 6 3 65 4 0 66 10 17 67 11 1 68 6 3 69 18 23 70 20 4 71 1 6 72 21 22 73 22 7 74 0 8 75 22 7 76 23 9 77 7 11 78 13 20 79 14 12 80 3 13 81 15 19 82 17 14 83 8 5 84 14 12 85 12 15 86 5 2 87 11 1 88 9 16 89 3 13 90 9 16 91 10 17 92 16 18 93 13 20 94 12 15 95 15 19 96 12 15 97 14 12 98 16 18 99 17 14 100 14 12 101 5 2 102 17 14 103 16 18 104 6 3 105 12 15 106 13 20 107 4 0 108 16 18 109 15 19 110 19 21 111 22 7 112 21 22 113 18 23 114 21 22 115 23 9 116 19 21 117 20 4 118 23 9 119 2 10 120 23 9 121 21 22 122 8 5 123 20 4 124 19 21 125 7 11 126 19 21 127 18 23 128</p>
+        </triangles>
+        <triangles material="Material_002-material" count="1">
+          <input semantic="VERTEX" source="#Circle-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Circle-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Circle-mesh-map-0" offset="2" set="0"/>
+          <p>9 16 21 11 1 22 10 17 23</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Circle" name="Circle" type="NODE">
+        <matrix sid="transform">1 2.22063e-16 2.22045e-16 -2.1584e-8 2.22063e-16 -8.43247e-5 -1 -0.02280951 -2.22045e-16 1 -8.43247e-5 -2.00906e-6 0 0 0 1</matrix>
+        <instance_geometry url="#Circle-mesh" name="Circle">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="Material_001-material" target="#Material_001-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="Material_002-material" target="#Material_002-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>
