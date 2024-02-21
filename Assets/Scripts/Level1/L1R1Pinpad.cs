@@ -8,35 +8,56 @@ public class L1R1Pinpad : MonoBehaviour
     [SerializeField] GameObject door;
     [SerializeField] GameObject lightSuccessObj;
     [SerializeField] GameObject lightFailObj;
+    [SerializeField] float lightStayOnTimer;
 
     private Animator doorAnimator;
     private Light lightSuccess;
     private Light lightFail;
 
+    private float currTimer;
+    private bool lightOn;
+
     void Start()
     {
+        // Get stuff
         doorAnimator = door.GetComponent<Animator>();
         lightSuccess = lightSuccessObj.GetComponent<Light>();
         lightFail = lightFailObj.GetComponent<Light>();
 
+        // Ensure lights are off by default
         lightSuccess.enabled = false;
         lightFail.enabled = false;
 
+        // Pinpad and events
         Pinpad p = GetComponent<Pinpad>();
         
         p.OnSuccess += () => {
             lightSuccess.enabled = true;
-            Debug.Log("Correct :)");
+            lightOn = true;
         };
         p.OnFail += () =>
         {
             lightFail.enabled = true;
-            Debug.Log("Incorrect :(");
+            lightOn = true;
         };
         p.OnKeyPress += (_, _) =>
         {
-            lightFail.enabled = false;
-            Debug.Log("Tap!");
+            //lightFail.enabled = false;
         };
+    }
+
+    void Update()
+    {
+        if (lightOn)
+        {
+            currTimer += Time.deltaTime;
+            if (currTimer > lightStayOnTimer)
+            {
+                lightSuccess.enabled = false;
+                lightFail.enabled = false;
+                lightOn = false;
+                currTimer = 0f;
+            }
+        }
     }
 }

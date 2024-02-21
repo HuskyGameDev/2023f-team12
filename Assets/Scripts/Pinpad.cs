@@ -18,15 +18,14 @@ using UnityEngine;
  */
 public class Pinpad : MonoBehaviour
 {
-    private const float PROCESSING_TOTAL_TIME = 0.75f;
+    [SerializeField] GameObject SubmitKey;
+    [SerializeField] GameObject ResetKey;
+    [SerializeField] GameObject[] Keys;
+    [SerializeField] public int[] Combination;
+    [SerializeField] public bool Enabled = true;
+    [SerializeField] float ResponseDelay = 0.75f;
 
-    public GameObject SubmitKey;
-    public GameObject ResetKey;
-    public GameObject[] Keys;
-    public int[] Combination;
-    public bool Enabled = true;
-
-    private List<int> enteredCombo = new();
+    public List<int> enteredCombo = new();
     private float processingTime = 0f;
 
     void Start()
@@ -85,7 +84,7 @@ public class Pinpad : MonoBehaviour
         {
             // Process it after a delay for suspense reasons
             processingTime += Time.deltaTime;
-            if (processingTime >= PROCESSING_TOTAL_TIME)
+            if (processingTime >= ResponseDelay)
             {
                 CheckCombo();
             }
