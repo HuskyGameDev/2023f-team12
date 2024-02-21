@@ -17,12 +17,20 @@ public class L1R1Pinpad : MonoBehaviour
     private float currTimer;
     private bool lightOn;
 
+    private AudioSource keyClick;
+    private AudioSource successChime;
+
     void Start()
     {
         // Get stuff
         doorAnimator = door.GetComponent<Animator>();
         lightSuccess = lightSuccessObj.GetComponent<Light>();
         lightFail = lightFailObj.GetComponent<Light>();
+
+        // Get sounds
+        var audioSources = GetComponents<AudioSource>(); // populated in order in inspector
+        keyClick = audioSources[0];
+        successChime = audioSources[1];
 
         // Ensure lights are off by default
         lightSuccess.enabled = false;
@@ -35,6 +43,7 @@ public class L1R1Pinpad : MonoBehaviour
             lightSuccess.enabled = true;
             lightOn = true;
             doorAnimator.Play("Base Layer.OnKeypad");
+            successChime.Play();
         };
         p.OnFail += () =>
         {
@@ -43,6 +52,7 @@ public class L1R1Pinpad : MonoBehaviour
         };
         p.OnKeyPress += (_, _) =>
         {
+            keyClick.Play();
             //lightFail.enabled = false;
         };
     }
