@@ -34,6 +34,7 @@ public class L1R1Pinpad : MonoBehaviour
         p.OnSuccess += () => {
             lightSuccess.enabled = true;
             lightOn = true;
+            doorAnimator.Play("Base Layer.OnKeypad");
         };
         p.OnFail += () =>
         {

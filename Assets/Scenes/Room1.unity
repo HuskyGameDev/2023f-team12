@@ -5747,6 +5747,8 @@ MonoBehaviour:
   - {fileID: 685491671}
   Combination: 00000000020000000300000005000000
   Enabled: 1
+  ResponseDelay: 0.25
+  enteredCombo: 
 --- !u!114 &1404393244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5762,6 +5764,7 @@ MonoBehaviour:
   door: {fileID: 1522680615}
   lightSuccessObj: {fileID: 340407032}
   lightFailObj: {fileID: 243628708}
+  lightStayOnTimer: 1.5
 --- !u!1 &1410914591
 GameObject:
   m_ObjectHideFlags: 0
@@ -6233,7 +6236,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 901289b32081af4449ce3346f0943f22, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
