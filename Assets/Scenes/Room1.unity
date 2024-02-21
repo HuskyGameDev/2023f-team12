@@ -5751,7 +5751,7 @@ MonoBehaviour:
   - {fileID: 1518082474}
   - {fileID: 1456219565}
   - {fileID: 685491671}
-  Combination: 00000000020000000300000005000000
+  Combination: 0400000006000000050000000100000005000000
   Enabled: 1
   ResponseDelay: 0.25
   enteredCombo: 
