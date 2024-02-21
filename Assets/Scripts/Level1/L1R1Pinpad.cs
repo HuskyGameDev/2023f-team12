@@ -50,8 +50,9 @@ public class L1R1Pinpad : MonoBehaviour
             lightFail.enabled = true;
             lightOn = true;
         };
-        p.OnKeyPress += (_, _) =>
+        p.OnKeyPress += (_, args) =>
         {
+            Debug.Log(args.Id);
             keyClick.Play();
             //lightFail.enabled = false;
         };
