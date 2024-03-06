@@ -1414,6 +1414,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickedUp: 0
   inspecting: 0
+  holdOffset: 0.75
+  inspectOffset: 1.25
 --- !u!65 &185756311
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -7,8 +7,9 @@ public class Item : Interactable
 {
     public bool pickedUp;
     public bool inspecting;
-    private bool hasPhysics;
     private Vector3 startPos;
+    [SerializeField] public float holdOffset = 0.75f;
+    [SerializeField] public float inspectOffset = 0.75f;
 
     private const float MOVE_SPEED = 15f;
     private const float ROT_SPEED = 15f;
@@ -21,7 +22,6 @@ public class Item : Interactable
 
     void Start()
     {
-        hasPhysics = Util.HasComponent<Rigidbody>(gameObject);
         startPos = transform.position;
     }
 
@@ -35,32 +35,31 @@ public class Item : Interactable
             Vector3 offset;
             if (inspecting)
             {
-                offset = new Vector3(Mathf.Cos(hLookAngle + INSP_ANGLE) * Mathf.Cos(vLookAngle) * ITEM_H_OFFSET, Mathf.Sin(vLookAngle) * 0.65f + ITEM_V_OFFSET_INSP, Mathf.Sin(hLookAngle + INSP_ANGLE) * Mathf.Cos(vLookAngle) * ITEM_H_OFFSET);
+                offset = new Vector3(Mathf.Cos(hLookAngle + INSP_ANGLE) * Mathf.Cos(vLookAngle) * inspectOffset, Mathf.Sin(vLookAngle) * 0.65f + ITEM_V_OFFSET_INSP, Mathf.Sin(hLookAngle + INSP_ANGLE) * Mathf.Cos(vLookAngle) * inspectOffset);
                 transform.position = Vector3.Lerp(transform.position, Global.Player.transform.position + offset, MOVE_SPEED * Time.deltaTime);
             }
             else
             {
-                offset = new Vector3(Mathf.Cos(hLookAngle + HOLD_ANGLE) * Mathf.Cos(vLookAngle * 0.5f) * ITEM_H_OFFSET, Mathf.Sin(vLookAngle) * 0.625f + ITEM_V_OFFSET_HOLD, Mathf.Sin(hLookAngle + HOLD_ANGLE) * Mathf.Cos(vLookAngle * 0.5f) * ITEM_H_OFFSET);
+                offset = new Vector3(Mathf.Cos(hLookAngle + HOLD_ANGLE) * Mathf.Cos(vLookAngle * 0.5f) * holdOffset, Mathf.Sin(vLookAngle) * 0.625f + ITEM_V_OFFSET_HOLD, Mathf.Sin(hLookAngle + HOLD_ANGLE) * Mathf.Cos(vLookAngle * 0.5f) * holdOffset);
                 transform.position = Vector3.Lerp(transform.position, Global.Player.transform.position + offset, MOVE_SPEED * Time.deltaTime);
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Global.Player.transform.position - new Vector3(transform.position.x, Global.Player.transform.position.y, transform.position.z)), ROT_SPEED * Time.deltaTime);
             }
         }
-        else if (hasPhysics)
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (Mathf.Abs(rb.velocity.y) > FALL_SPEED_THRESH)
         {
-            Rigidbody rb = GetComponent<Rigidbody>();
-            if (Mathf.Abs(rb.velocity.y) > FALL_SPEED_THRESH)
-            {
-                transform.position = startPos;
-                rb.velocity = Vector3.zero;
-            }
+            transform.position = startPos;
+            rb.velocity = Vector3.zero;
         }
     }
 
     public void PickUp()
     {
         pickedUp = true;
-        GetComponent<BoxCollider>().enabled = false;
-        if (hasPhysics) GetComponent<Rigidbody>().useGravity = false;
+        //GetComponent<BoxCollider>().enabled = false;
+        GetComponent<BoxCollider>().excludeLayers = GetComponent<BoxCollider>().excludeLayers.value | Util.LayerMask(2);
+        GetComponent<Rigidbody>().useGravity = false;
 
         Action<Item> handler = OnPickUp;
         handler?.Invoke(this);
@@ -69,8 +68,9 @@ public class Item : Interactable
     public void SetDown()
     {
         pickedUp = false;
-        GetComponent<BoxCollider>().enabled = true;
-        if (hasPhysics) GetComponent<Rigidbody>().useGravity = true;
+        //GetComponent<BoxCollider>().enabled = true;
+        GetComponent<BoxCollider>().excludeLayers = GetComponent<BoxCollider>().excludeLayers.value & ~Util.LayerMask(2);
+        GetComponent<Rigidbody>().useGravity = true;
     }
 
     public void Inspect()

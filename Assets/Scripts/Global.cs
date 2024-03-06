@@ -13,6 +13,15 @@ public static class Global
     public static Item[] Inventory = new Item[InventorySize];
     public static int HeldItem = 0;
 
+    private static float ms = 1f;
+    public static float MouseSensitivity {
+        get => ms;
+        set
+        {
+            ms = value;
+        }
+    }
+
     public static void NextItem()
     {
         // Deactivate old current item, switch item, and set new current item's position to near player and activate.

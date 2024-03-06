@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] public Transform playerCamera = null;
-    [SerializeField] float mouseSensitivity = 1f;
     [SerializeField] float walkSpeed = 6.0f;
     [SerializeField] float gravity = -13.0f;
     [SerializeField] [Range(0.0f, 0.5f)] float smoothMoveTime = 0.3f;
     [SerializeField] [Range(0.0f, 0.5f)] float mouseSmoothTime = 0.03f;
+    float mouseSensitivity { get => Global.MouseSensitivity; }
 
     [SerializeField] bool lockCursor = true;
 

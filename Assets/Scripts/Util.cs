@@ -18,4 +18,9 @@ public static class Util
     {
         return parent.transform.Find(name).gameObject;
     }
+
+    public static int LayerMask(int layer)
+    {
+        return 1 << layer;
+    }
 }
