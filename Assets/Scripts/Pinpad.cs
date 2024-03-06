@@ -95,13 +95,23 @@ public class Pinpad : MonoBehaviour
     {
         // Check if key was successful
         bool success = true;
-        for (int i = 0; i < Combination.Length; i++)
+
+        if (Combination.Length == enteredCombo.Count)
         {
-            if (Combination[i] != enteredCombo[i])
+            // Combo is correct length
+            for (int i = 0; i < Combination.Length; i++)
             {
-                success = false;
-                break;
+                if (Combination[i] != enteredCombo[i])
+                {
+                    success = false;
+                    break;
+                }
             }
+        }
+        else
+        {
+            // Combo is not correct length
+            success = false;
         }
 
         // Run event listeners
