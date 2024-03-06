@@ -9,12 +9,6 @@ public class OptionsScreen : MonoBehaviour
 {
     public Toggle fullscreenTog, vsyncTog;
 
-    public List<ResItem> resolution = new List<ResItem>();
-
-    private int selectedResolution;
-
-    public TMP_Text resolutionLabel;
-
     public AudioMixer theMixer;
 
     public TMP_Text masterLabel, musicLabel, sfxLabel;
@@ -32,31 +26,6 @@ public class OptionsScreen : MonoBehaviour
         else
         {
             vsyncTog.isOn = true;
-        }
-
-        bool foundRes = false;
-        for (int i = 0; i < resolution.Count; i++)
-        {
-            if (Screen.width == resolution[i].horizontal && Screen.height == resolution[i].vertical)
-            {
-                foundRes = true;
-
-                selectedResolution = i;
-
-                UpdateResLabel();
-            }
-        }
-
-        if (!foundRes)
-        {
-            ResItem newRes = new ResItem();
-            newRes.horizontal = Screen.width;
-            newRes.vertical = Screen.height;
-
-            resolution.Add(newRes);
-            selectedResolution = resolution.Count - 1;
-
-            UpdateResLabel();
         }
 
         float vol = 0;
@@ -77,48 +46,6 @@ public class OptionsScreen : MonoBehaviour
     void Update()
     {
 
-    }
-
-    public void ResLeft()
-    {
-        selectedResolution--;
-        if (selectedResolution < 0)
-        {
-            selectedResolution = 0;
-        }
-
-        UpdateResLabel();
-    }
-
-    public void ResRight()
-    {
-        selectedResolution++;
-        if (selectedResolution > resolution.Count - 1)
-        {
-            selectedResolution = resolution.Count - 1;
-        }
-
-        UpdateResLabel();
-    }
-
-    public void UpdateResLabel()
-    {
-        resolutionLabel.text = resolution[selectedResolution].horizontal.ToString() + " x " + resolution[selectedResolution].vertical.ToString();
-    }
-
-    public void ApplyGraphics()
-    {
-        //Screen.fullScreen = fullscreenTog.isOn;
-        if (vsyncTog.isOn)
-        {
-            QualitySettings.vSyncCount = 1;
-        }
-        else
-        {
-            QualitySettings.vSyncCount = 0;
-        }
-
-        Screen.SetResolution(resolution[selectedResolution].horizontal, resolution[selectedResolution].vertical, fullscreenTog.isOn);
     }
 
     public void setMasterVol()
@@ -147,9 +74,3 @@ public class OptionsScreen : MonoBehaviour
     }
 }
 
-[System.Serializable]
-public class ResItem
-{
-    public int horizontal, vertical;
-
-}
