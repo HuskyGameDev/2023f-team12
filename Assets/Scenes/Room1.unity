@@ -2970,7 +2970,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ca593f83319af34c9b5fa74d77e43fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingTime: 120
   StartActive: 1
 --- !u!4 &405858935
 Transform:
@@ -8627,7 +8626,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ca593f83319af34c9b5fa74d77e43fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingTime: 180
   StartActive: 0
 --- !u!1 &1518082474 stripped
 GameObject:

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class L1R1Pinpad : MonoBehaviour
+public class PaintingPinpad : MonoBehaviour
 {
 
     [SerializeField] GameObject door;
