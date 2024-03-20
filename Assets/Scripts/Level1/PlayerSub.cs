@@ -7,7 +7,7 @@ public class PlayerSub : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.DoorClose += ChangeLocation;
+   //     EventManager.DoorClose += ChangeLocation;
     }
 
     // Update is called once per frame
@@ -16,8 +16,8 @@ public class PlayerSub : MonoBehaviour
         //Play animation of player being drapped back upstairs
     }
 
-    private void OnTriggerEnter3D(Collider3D collision)
-    {
-        EventManger.StartDoorEvent();
-    }
+    //private void OnTriggerEnter3D(Collider3D collision)
+   // {
+   //     EventManger.StartDoorEvent();
+  //  }
 }
