@@ -5,16 +5,21 @@ using UnityEngine;
 
 /**
  * HOW TO USE PINPAD:
- * - First, make sure your pinpad has both the Interactable and Pinpad components
- * - Set up the Pinpad component:
- *     - In the Keys property, add each key object, in order.
- *     - In the Combination property, add a combination, in order. Each number refers to the index of the key in the Keys property, not the actual pin.
- *     - Optionally, specify a submit and/or reset code key.
- *         - If submit key is not specified, the pin pad will automatically check the code when all digits are entered.
- * - Create a script for the object.
- *     - In the Start() method, get the Pinpad component.
- *     - Then, add your own methods to the OnKeyPress, OnSuccess, and OnFail events using +=
- *     - If you would like to reference an existing implementation, see L1R1Pinpad.cs
+ * - The Pinpad component is intended for making events happen after a certain code sequence is entered by interacting with objects.
+ *     - Its intended use is for a pinpad, but it can be used for similar code-entering things if necessary.
+ * - Add Pinpad to the object (not the buttons, the object holding the buttons)
+ * - Make all buttons you want to use part of the Interactable layer
+ *     - The easiest way to do this is to set the layer of the holding object to Interactable and have Unity apply it recursively
+ * - Drag the button children into the Keys array in numerical order, counting up from 0
+ *     - The first object in the array will be the 0 button, the second object the 1 button, the third the 2 button and so on
+ *     - If your button does not have number keys, pretend it does for the purposes of this
+ * - Set up the combination in the combination array using the indices from the Keys array
+ * - Optional: set up a submit key and/or reset key.
+ *     - If a submit key is not given, the pinpad will automatically submit when the correct length is entered after a delay specified by ResponseDelay (in seconds).
+ * - Create a custom script for your pinpad that references the Pinpad component.
+ *     - This is how you add custom functionality to your pinpad, such as making it open a door on success or playing a sound on button press.
+ *     - Use the OnKeyPress, OnSuccess, and OnFail events to add your own custom functionality. Use += for this.
+ *     - For an example implementation, see PaintingPinpad.cs.
  */
 public class Pinpad : MonoBehaviour
 {
