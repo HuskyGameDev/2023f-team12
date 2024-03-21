@@ -41,7 +41,7 @@ public class OptionsMenuOpener : MonoBehaviour
         Paused = true;
     }
 
-    void Play()
+    public void Play()
     {
         PauseScreen.SetActive(false);
         Time.timeScale = 1f;
