@@ -6,10 +6,15 @@ using Random = UnityEngine.Random;
 
 public class RotaryPhone : MonoBehaviour
 {
+    private const float RotToSpeed = 20f;
+    private const float RotFromSpeed = RotToSpeed * -0.5f;
+
     [Header("Puzzle")]
     [SerializeField] public string[] PhoneNumbers = new string[0];
 
     [Header("Controls")]
+    [SerializeField] public GameObject Plate;
+    [Space(12)]
     [SerializeField] public GameObject One;
     [SerializeField] public GameObject Two;
     [SerializeField] public GameObject Three;
@@ -27,10 +32,14 @@ public class RotaryPhone : MonoBehaviour
     [SerializeField] public string CorrectNumber;
     internal List<string> EnteredNumber = new();
     internal bool Correct = false;
-    internal bool Accepting = true;
+    internal bool Rotating = false;
+
+    private float rotToAngle;
+    private float origAngle;
 
     void Start()
     {
+        origAngle = Plate.transform.localRotation.z;
         if (PhoneNumbers.Length > 0)
         {
             CorrectNumber = PhoneNumbers[Random.Range(0, PhoneNumbers.Length)];
@@ -44,25 +53,57 @@ public class RotaryPhone : MonoBehaviour
         }
 
         // Deal with the controls and stuff
-        if (Util.TryGetComponent<Interactable>(One,   out var inter1)) inter1.OnInteract += (_, _) => HandleButton("1");
-        if (Util.TryGetComponent<Interactable>(Two,   out var inter2)) inter2.OnInteract += (_, _) => HandleButton("2");
-        if (Util.TryGetComponent<Interactable>(Three, out var inter3)) inter3.OnInteract += (_, _) => HandleButton("3");
-        if (Util.TryGetComponent<Interactable>(Four,  out var inter4)) inter4.OnInteract += (_, _) => HandleButton("4");
-        if (Util.TryGetComponent<Interactable>(Five,  out var inter5)) inter5.OnInteract += (_, _) => HandleButton("5");
-        if (Util.TryGetComponent<Interactable>(Six,   out var inter6)) inter6.OnInteract += (_, _) => HandleButton("6");
-        if (Util.TryGetComponent<Interactable>(Seven, out var inter7)) inter7.OnInteract += (_, _) => HandleButton("7");
-        if (Util.TryGetComponent<Interactable>(Eight, out var inter8)) inter8.OnInteract += (_, _) => HandleButton("8");
-        if (Util.TryGetComponent<Interactable>(Nine,  out var inter9)) inter9.OnInteract += (_, _) => HandleButton("9");
-        if (Util.TryGetComponent<Interactable>(Zero,  out var inter0)) inter0.OnInteract += (_, _) => HandleButton("0");
+        // 74.818
+        if (Util.TryGetComponent<Interactable>(One,      out var inter1)) inter1.OnInteract += (_, _) => HandleButton("1",  80.662f - 74.818f);
+        if (Util.TryGetComponent<Interactable>(Two,      out var inter2)) inter2.OnInteract += (_, _) => HandleButton("2", 107.91f  - 74.818f);
+        if (Util.TryGetComponent<Interactable>(Three,    out var inter3)) inter3.OnInteract += (_, _) => HandleButton("3", 134.395f - 74.818f);
+        if (Util.TryGetComponent<Interactable>(Four,     out var inter4)) inter4.OnInteract += (_, _) => HandleButton("4", 163.084f - 74.818f);
+        if (Util.TryGetComponent<Interactable>(Five,     out var inter5)) inter5.OnInteract += (_, _) => HandleButton("5", 190.532f - 74.818f);
+        if (Util.TryGetComponent<Interactable>(Six,      out var inter6)) inter6.OnInteract += (_, _) => HandleButton("6", 218.57f  - 74.818f);
+        if (Util.TryGetComponent<Interactable>(Seven,    out var inter7)) inter7.OnInteract += (_, _) => HandleButton("7", 245.1f   - 74.818f);
+        if (Util.TryGetComponent<Interactable>(Eight,    out var inter8)) inter8.OnInteract += (_, _) => HandleButton("8", 273.482f - 74.818f);
+        if (Util.TryGetComponent<Interactable>(Nine,     out var inter9)) inter9.OnInteract += (_, _) => HandleButton("9", 299.201f - 74.818f);
+        if (Util.TryGetComponent<Interactable>(Zero,     out var inter0)) inter0.OnInteract += (_, _) => HandleButton("0", 326.8f   - 74.818f);
+        //if (Util.TryGetComponent<Interactable>(Pound,    out var interP)) interP.OnInteract += (_, _) => HandleButton("#", 378.703f);
+        //if (Util.TryGetComponent<Interactable>(Asterisk, out var interA)) interA.OnInteract += (_, _) => HandleButton("*", 353.904f);
     }
 
     void Update()
     {
-        Accepting = true; // TODO: REMOVE
-
         if (Correct)
         {
             // do stuff
+        }
+        else if (Rotating)
+        {
+            bool rotTo = rotToAngle != origAngle;
+            float oldRot = Plate.transform.localRotation.z;
+            float delta = Time.deltaTime * (rotTo ? RotToSpeed : RotFromSpeed);
+            float newRot = oldRot + delta;
+
+            bool end = false;
+            if (Mathf.Sign(delta) > 0 && newRot > rotToAngle)
+            {
+                newRot -= newRot - rotToAngle;
+                end = true;
+            }
+            else if (Mathf.Sign(delta) < 0 && newRot < rotToAngle)
+            {
+                newRot += newRot - rotToAngle;
+                end = true;
+            }
+
+            if (end)
+            {
+                if (rotToAngle == origAngle)
+                {
+                    Rotating = false;
+                }
+                else
+                {
+                    rotToAngle = origAngle;
+                }
+            }
         }
         else
         {
@@ -81,7 +122,6 @@ public class RotaryPhone : MonoBehaviour
                 if (correct)
                 {
                     Correct = true;
-                    Accepting = false;
                     OnSuccess?.Invoke();
                     Debug.Log("Phone number correct");
                 }
@@ -95,12 +135,13 @@ public class RotaryPhone : MonoBehaviour
         }
     }
 
-    internal void HandleButton(string num)
+    internal void HandleButton(string num, float rot)
     {
         Debug.Log(num);
-        if (Accepting)
+        if (!Correct && !Rotating)
         {
-            Accepting = false;
+            Rotating = true;
+            rotToAngle = origAngle + rot;
             EnteredNumber.Add(num);
         }
     }
