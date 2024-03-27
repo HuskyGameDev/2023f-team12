@@ -6,8 +6,8 @@ using Random = UnityEngine.Random;
 
 public class RotaryPhone : MonoBehaviour
 {
-    private const float RotToSpeed = 20f;
-    private const float RotFromSpeed = RotToSpeed * -0.5f;
+    private const float RotToSpeed = 270f;
+    private const float RotFromSpeed = RotToSpeed * -0.6f;
 
     [Header("Puzzle")]
     [SerializeField] public string[] PhoneNumbers = new string[0];
@@ -31,7 +31,7 @@ public class RotaryPhone : MonoBehaviour
     [Header("Debug")]
     [SerializeField] public string CorrectNumber;
     internal List<string> EnteredNumber = new();
-    internal bool Correct = false;
+    [SerializeField] internal bool Correct = false;
     internal bool Rotating = false;
 
     private float rotToAngle;
@@ -39,7 +39,7 @@ public class RotaryPhone : MonoBehaviour
 
     void Start()
     {
-        origAngle = Plate.transform.localRotation.z;
+        origAngle = Plate.transform.localEulerAngles.z;
         if (PhoneNumbers.Length > 0)
         {
             CorrectNumber = PhoneNumbers[Random.Range(0, PhoneNumbers.Length)];
@@ -77,17 +77,17 @@ public class RotaryPhone : MonoBehaviour
         else if (Rotating)
         {
             bool rotTo = rotToAngle != origAngle;
-            float oldRot = Plate.transform.localRotation.z;
+            float oldRot = Plate.transform.localEulerAngles.z;
             float delta = Time.deltaTime * (rotTo ? RotToSpeed : RotFromSpeed);
             float newRot = oldRot + delta;
 
             bool end = false;
-            if (Mathf.Sign(delta) > 0 && newRot > rotToAngle)
+            if (Mathf.Sign(delta) > 0 && oldRot < rotToAngle && newRot >= rotToAngle)
             {
                 newRot -= newRot - rotToAngle;
                 end = true;
             }
-            else if (Mathf.Sign(delta) < 0 && newRot < rotToAngle)
+            else if (Mathf.Sign(delta) < 0 && oldRot > rotToAngle && newRot <= rotToAngle)
             {
                 newRot += newRot - rotToAngle;
                 end = true;
@@ -104,6 +104,9 @@ public class RotaryPhone : MonoBehaviour
                     rotToAngle = origAngle;
                 }
             }
+
+            var fullRot = Plate.transform.localEulerAngles;
+            Plate.transform.localEulerAngles = new Vector3(fullRot.x, fullRot.y, newRot);
         }
         else
         {
@@ -141,7 +144,7 @@ public class RotaryPhone : MonoBehaviour
         if (!Correct && !Rotating)
         {
             Rotating = true;
-            rotToAngle = origAngle + rot;
+            rotToAngle = (origAngle + rot) % 360f;
             EnteredNumber.Add(num);
         }
     }
