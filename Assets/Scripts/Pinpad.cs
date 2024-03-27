@@ -23,15 +23,19 @@ using UnityEngine;
  */
 public class Pinpad : MonoBehaviour
 {
+
     [SerializeField] GameObject SubmitKey;
     [SerializeField] GameObject ResetKey;
     [SerializeField] GameObject[] Keys;
     [SerializeField] public int[] Combination;
     [SerializeField] public bool Enabled = true;
     [SerializeField] float ResponseDelay = 0.75f;
+    [SerializeField] float IncorrectDelay = 0.75f;
 
     public List<int> enteredCombo = new();
     private float processingTime = 0f;
+    private float incorrectWait = 0f;
+    private bool waitingAfterIncorrect = false;
 
     void Start()
     {
@@ -47,7 +51,7 @@ public class Pinpad : MonoBehaviour
 
             // Set an OnInteract event to add the combination id to the entered combo list, also activate OnKeyPress event
             interactable.OnInteract += (_, _) => {
-                if (!Enabled || enteredCombo.Count == Combination.Length) return;
+                if (!Enabled || enteredCombo.Count == Combination.Length || waitingAfterIncorrect) return;
 
                 enteredCombo.Add(j);
 
@@ -94,6 +98,14 @@ public class Pinpad : MonoBehaviour
                 CheckCombo();
             }
         }
+        else if (waitingAfterIncorrect)
+        {
+            incorrectWait += Time.deltaTime;
+            if (incorrectWait >= IncorrectDelay)
+            {
+                waitingAfterIncorrect = false;
+            }
+        }
     }
 
     void CheckCombo()
@@ -117,6 +129,10 @@ public class Pinpad : MonoBehaviour
         {
             // Combo is not correct length
             success = false;
+            if (SubmitKey == null)
+            {
+                waitingAfterIncorrect = true;
+            }
         }
 
         // Run event listeners
