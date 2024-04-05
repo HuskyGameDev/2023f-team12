@@ -5506,6 +5506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Handle: {fileID: 2059429648}
+  delay: 3
 --- !u!1001 &605446772
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17867,11 +17868,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5376960082112689857, guid: 586b62aa35d4cf14b9e7b967f87470c4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.271
+      value: 20.6
       objectReference: {fileID: 0}
     - target: {fileID: 5376960082112689857, guid: 586b62aa35d4cf14b9e7b967f87470c4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.6
+      value: 14.64
       objectReference: {fileID: 0}
     - target: {fileID: 5376960082112689857, guid: 586b62aa35d4cf14b9e7b967f87470c4, type: 3}
       propertyPath: m_LocalPosition.z

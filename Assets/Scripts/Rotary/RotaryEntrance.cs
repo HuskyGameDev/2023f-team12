@@ -12,14 +12,14 @@ public class RotaryEntrance : MonoBehaviour
 
     void Start()
     {
-        GameObject parent = this.transform.parent.gameObject;
-        Animator animator = parent.GetComponent<Animator>();
+       // GameObject parent = this.transform.parent.gameObject;
+       // Animator animator = parent.GetComponent<Animator>();
         AudioSource doorCreak = GetComponent<AudioSource>();
         if (Util.TryGetComponent<Interactable>(Handle, out var inter))
         {
             inter.OnInteract += (_, _) =>
             {
-                animator.Play("Base Layer.Door2Open");
+               // animator.Play("Base Layer.Door2Open");
                 doorCreak.Play();
                 open = true;
             };
@@ -43,7 +43,7 @@ public class RotaryEntrance : MonoBehaviour
 
     void Close()
     {
-        Animator animator = parent.GetComponent<Animator>();
-        animator.Play("Base Layer.Door2Close");
+        //Animator animator = parent.GetComponent<Animator>();
+       // animator.Play("Base Layer.Door2Close");
     }
 }
