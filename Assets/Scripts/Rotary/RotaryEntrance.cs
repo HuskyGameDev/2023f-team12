@@ -4,57 +4,59 @@ using UnityEngine;
 
 public class RotaryEntrance : MonoBehaviour
 {
-    //[SerializeField] GameObject Handle;
-    //[SerializeField] GameObject door;
+    [SerializeField] GameObject Handle;
+    [SerializeField] GameObject door;
 
-    //public float delay = 3;
-    //float timer;
-    //bool open = false;
-    //bool first = true;
+    public float delay = 3;
+    float timer;
+    bool open = false;
 
-    //[SerializeField] AudioSource DoorCreak;
-    //[SerializeField] AudioSource DoorClose;
-    //[SerializeField] Animator doorAnimator;
+    private AudioSource[] doorCreak;
+    private AudioSource[] doorClose;
+    private Animator doorAnimator;
 
-    //void Start()
-    //{
-    //    doorAnimator = door.GetComponent<Animator>();
-    //    doorCreak = GetComponent<AudioSource>();
+    void Start()
+    {
+        doorAnimator = door.GetComponent<Animator>();
 
-    //    var audioSources = GetComponents<AudioSource>();
-    //    doorOpen = audioSources[0];
-    //    DoorClose = audioSources[1];
+        var audioSources = GetComponents<AudioSource>();
+        doorCreak = new AudioSource[] { audioSources[0], audioSources[1], audioSources[2], audioSources[3], audioSources[4] };
+        doorClose = new AudioSource[] { audioSources[5], audioSources[6] };
 
-    //    if (Util.TryGetComponent<Interactable>(Handle, out var inter))
-    //    {
-    //        inter.OnInteract += (_, _) =>
-    //        {
-    //            animator.Play("Base Layer.Door2Open");
-    //            doorCreak.Play();
-    //            open = true;
-    //        };
-    //    }
-    //}
+        if (Util.TryGetComponent<Interactable>(Handle, out var inter))
+        {
+            inter.OnInteract += (_, _) =>
+            {
+                if (open) return;
+                doorAnimator.Play("Base Layer.Open");
+                doorCreak[Random.Range(0, doorCreak.Length)].Play();
+                open = true;
+            };
+        }
+    }
 
 
-    //void Update()
-    //{ 
-    //    if (open)
-    //    {
-    //        timer += Time.deltaTime;
-    //        if((timer > delay) && first) // first is included so the door only opens/closes once
-    //        {
-    //            Close();
-    //            first = false;
-    //            open = false;
-    //        }
-    //    }
-    //}
+    void Update()
+    { 
+        if (open)
+        {
+            timer += Time.deltaTime;
+            if(timer > delay)
+            {
+                Close();
+                open = false;
+            }
+        }
+        else
+        {
+            timer = 0;
+        }
+    }
 
-    //void Close()
-    //{
-    //    doorAnimator = parent.GetComponent<Animator>();
-    //    doorAnimator.Play("Base Layer.Door2Close");
-    //    doorClose.Play();
-    //}
+    void Close()
+    {
+        doorAnimator = transform.parent.GetComponent<Animator>();
+        doorAnimator.Play("Base Layer.Close");
+        doorClose[Random.Range(0, doorClose.Length)].Play();
+    }
 }
