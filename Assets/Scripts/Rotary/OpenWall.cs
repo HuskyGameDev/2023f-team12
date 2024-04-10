@@ -22,9 +22,7 @@ public class OpenWall : MonoBehaviour
         {
             inter.OnInteract += (_, _) =>
             {
-                if (open) return;
                 doorAnimator.Play("Base Layer.Wall");
-                open = true;
             };
         }
 
