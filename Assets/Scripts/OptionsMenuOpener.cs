@@ -37,7 +37,7 @@ public class OptionsMenuOpener : MonoBehaviour
     void Stop()
     {
         PauseScreen.SetActive(true);
-        Time.timeScale = 0f;
+        Time.timeScale = 0;
         Paused = true;
     }
 

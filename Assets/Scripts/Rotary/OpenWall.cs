@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class OpenWall : MonoBehaviour
 {
-
-
-
     [SerializeField] GameObject door;
     [SerializeField] GameObject button;
     private Animator doorAnimator;
@@ -31,6 +28,6 @@ public class OpenWall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //
     }
 }

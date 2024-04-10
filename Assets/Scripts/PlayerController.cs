@@ -43,6 +43,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(Time.timeScale == 0)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            return;
+        }
+
         // Deal with movement
         UpdateMouseLook();
         UpdateMovement();
