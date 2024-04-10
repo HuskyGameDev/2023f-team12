@@ -14182,6 +14182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d09bfb3508bc3499ef41e60ff206f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1 &685491671 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -208595431880416365, guid: eefdb213cda0b2645905d420fedb21f1, type: 3}
@@ -43390,15 +43392,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5376960082112689857, guid: 586b62aa35d4cf14b9e7b967f87470c4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -26.56
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5376960082112689857, guid: 586b62aa35d4cf14b9e7b967f87470c4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.396
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5376960082112689857, guid: 586b62aa35d4cf14b9e7b967f87470c4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.46
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 5376960082112689857, guid: 586b62aa35d4cf14b9e7b967f87470c4, type: 3}
       propertyPath: m_LocalRotation.w
