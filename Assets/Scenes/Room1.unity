@@ -24400,7 +24400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1204101802}
   - component: {fileID: 1204101803}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hinge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24436,7 +24436,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 760c9ddf4cca38e41a97027308b67562, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -45389,7 +45389,7 @@ GameObject:
   - component: {fileID: 5908160864284432659}
   - component: {fileID: 2618047981752108499}
   - component: {fileID: 8328065657144686442}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45581,6 +45581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fb54697512ae2428c33d2644447aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 919132147626141950}
 --- !u!1 &919132148223355757
 GameObject:
   m_ObjectHideFlags: 0
@@ -45590,13 +45591,62 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450652493148631}
-  m_Layer: 0
+  - component: {fileID: 919132148223355759}
+  - component: {fileID: 919132148223355758}
+  - component: {fileID: 919132148223355760}
+  m_Layer: 6
   m_Name: briefcase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &919132148223355758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148223355757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1d0b95a738af74f8fc81bfa8a66866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hinge: {fileID: 1204101801}
+--- !u!114 &919132148223355759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148223355757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5739a1e4db46a9a49afb274848b240ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &919132148223355760
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148223355757}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.45, y: 0.1, z: 0.3}
+  m_Center: {x: 0, y: 0.04, z: 0}
 --- !u!1 &919132148327782111
 GameObject:
   m_ObjectHideFlags: 0
@@ -45734,7 +45784,7 @@ GameObject:
   - component: {fileID: 2268069395352571659}
   - component: {fileID: 1853848649349522754}
   - component: {fileID: 2268069395352571660}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
