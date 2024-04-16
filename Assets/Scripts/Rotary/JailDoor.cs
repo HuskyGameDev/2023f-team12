@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialDoor : MonoBehaviour
+public class JailDoor : MonoBehaviour
 {
     [SerializeField] GameObject door; 
     private Animator JailDoor;
