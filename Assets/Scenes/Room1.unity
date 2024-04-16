@@ -37527,7 +37527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1725698327}
   - component: {fileID: 1725698328}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hinge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37563,7 +37563,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 2378cb5c5704eaf4a97855df5831be40, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -45699,13 +45699,27 @@ GameObject:
   - component: {fileID: 342673088}
   - component: {fileID: 342673090}
   - component: {fileID: 342673091}
-  m_Layer: 0
+  - component: {fileID: 919132149458828792}
+  m_Layer: 6
   m_Name: V2BookClosed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &919132149458828792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149458828791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b2bd041b6600e4b8e271bde1e6e7db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hinge: {fileID: 1725698326}
 --- !u!4 &1464526428414601225
 Transform:
   m_ObjectHideFlags: 0
@@ -46122,7 +46136,7 @@ GameObject:
   - component: {fileID: 1464526428414601225}
   - component: {fileID: 4646126697914947022}
   - component: {fileID: 4190479483755593551}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right Book Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46394,7 +46408,7 @@ GameObject:
   - component: {fileID: 7586943956947888844}
   - component: {fileID: 1654021681833539211}
   - component: {fileID: 8335093917731021409}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left Book Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}

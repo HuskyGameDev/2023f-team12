@@ -17,7 +17,8 @@ public class Briefcase : MonoBehaviour
             if (!open)
             {
                 open = true;
-                animator.Play("Base Layer.BriefcaseOpen");
+                animator.Play("Base Layer.Briefcase");
+                GetComponent<BoxCollider>().enabled = false;
             }
         };
     }

@@ -71,6 +71,9 @@ public class Item : Interactable
         //GetComponent<BoxCollider>().enabled = true;
         GetComponent<BoxCollider>().excludeLayers = GetComponent<BoxCollider>().excludeLayers.value & ~Util.LayerMask(2);
         GetComponent<Rigidbody>().useGravity = true;
+
+        Action<Item> handler = OnSetDown;
+        handler?.Invoke(this);
     }
 
     public void Inspect()
@@ -85,8 +88,13 @@ public class Item : Interactable
     {
         if (!pickedUp) return;
         inspecting = false;
+
+        Action<Item> handler = OnStopInspect;
+        handler?.Invoke(this);
     }
 
     public event Action<Item> OnPickUp;
+    public event Action<Item> OnSetDown;
     public event Action<Item> OnInspect;
+    public event Action<Item> OnStopInspect;
 }
