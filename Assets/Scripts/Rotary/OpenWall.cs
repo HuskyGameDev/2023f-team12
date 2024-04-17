@@ -5,29 +5,28 @@ using UnityEngine;
 public class OpenWall : MonoBehaviour
 {
     [SerializeField] GameObject door;
-    [SerializeField] GameObject button;
-    private Animator doorAnimator;
+    [SerializeField] GameObject safe;
 
-    private AudioSource[] Sound;
+    private bool pressed = false;
 
-    // Start is called before the first frame update
     void Start()
     {
-        doorAnimator = door.GetComponent<Animator>();
+        var doorAnimator = door.GetComponent<Animator>();
 
-        if (Util.TryGetComponent<Interactable>(button, out var inter))
+        GetComponent<Interactable>().OnInteract += (_, _) =>
         {
-            inter.OnInteract += (_, _) =>
+            if (!pressed)
             {
+                pressed = true;
                 doorAnimator.Play("Base Layer.Wall");
-            };
-        }
-
+                StartCoroutine(SafeAnimation());
+            }
+        };
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator SafeAnimation()
     {
-        //
+        yield return new WaitForSeconds(7);
+        safe.GetComponent<Animator>().Play("Base Layer.OpenBig");
     }
 }
