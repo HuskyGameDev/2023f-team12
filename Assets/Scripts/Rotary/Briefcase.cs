@@ -5,6 +5,7 @@ using UnityEngine;
 public class Briefcase : MonoBehaviour
 {
     [SerializeField] GameObject hinge;
+    [SerializeField] GameObject book;
     private Animator animator;
     private bool open = false;
 
@@ -18,7 +19,11 @@ public class Briefcase : MonoBehaviour
             {
                 open = true;
                 animator.Play("Base Layer.Briefcase");
-                GetComponent<BoxCollider>().enabled = false;
+                foreach (BoxCollider collider in GetComponents<BoxCollider>())
+                {
+                    collider.enabled = false;
+                }
+                book.GetComponent<Item>().enabled = true;
             }
         };
     }
