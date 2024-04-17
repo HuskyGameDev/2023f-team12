@@ -14,6 +14,7 @@ public class OptionsMenuOpener : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;
+        PauseScreen.SetActive(false);
     }
 
 

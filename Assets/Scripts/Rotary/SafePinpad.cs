@@ -12,19 +12,7 @@ public class SafePinpad : MonoBehaviour
 
         p.OnSuccess += () =>
         {
-            Debug.Log("YIPPEE");
             GetComponent<Animator>().Play("Base Layer.OpenSmall");
-        };
-
-        p.OnFail += () =>
-        {
-            Debug.Log("Boowomp");
-        };
-
-
-        p.OnKeyPress += (_, args) =>
-        {
-            Debug.Log(args.Id);
         };
     }
 

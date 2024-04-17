@@ -6,6 +6,7 @@ public class PaintingPinpad : MonoBehaviour
 {
 
     [SerializeField] GameObject door;
+    [SerializeField] GameObject safetyObj;
     [SerializeField] GameObject lightSuccessObj;
     [SerializeField] GameObject lightFailObj;
     [SerializeField] float lightStayOnTimer;
@@ -13,6 +14,7 @@ public class PaintingPinpad : MonoBehaviour
     private Animator doorAnimator;
     private Light lightSuccess;
     private Light lightFail;
+    private Unstuckificator safety;
 
     private float currTimer;
     private bool lightOn;
@@ -26,6 +28,8 @@ public class PaintingPinpad : MonoBehaviour
         doorAnimator = door.GetComponent<Animator>();
         lightSuccess = lightSuccessObj.GetComponent<Light>();
         lightFail = lightFailObj.GetComponent<Light>();
+        lightFail = lightFailObj.GetComponent<Light>();
+        safety = safetyObj.GetComponent<Unstuckificator>();
 
         // Get sounds
         var audioSources = GetComponents<AudioSource>(); // populated in order in inspector
@@ -44,6 +48,7 @@ public class PaintingPinpad : MonoBehaviour
             lightOn = true;
             doorAnimator.Play("Base Layer.OnKeypad");
             successChime.Play();
+            StartCoroutine(EnableSafety());
         };
         p.OnFail += () =>
         {
@@ -70,5 +75,11 @@ public class PaintingPinpad : MonoBehaviour
                 currTimer = 0f;
             }
         }
+    }
+
+    IEnumerator EnableSafety()
+    {
+        yield return new WaitForSeconds(2);
+        safety.EnableTrigger();
     }
 }
