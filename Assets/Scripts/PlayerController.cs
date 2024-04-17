@@ -176,6 +176,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Teleport(Vector3 to)
+    {
+        // https://discussions.unity.com/t/teleporting-character-issue-with-transform-position-in-unity-2018-3/221631/4
+        controller.enabled = false;
+        gameObject.transform.position = to;
+        controller.enabled = true;
+    }
+
     private Item HeldItem
     {
         get

@@ -10,18 +10,24 @@ public class Unstuckificator : MonoBehaviour
     void Start()
     {
         SafetyPos = transform.Find("Safety").transform.position;
-        Debug.Log(SafetyPos.x + "," + SafetyPos.y + "," + SafetyPos.z);
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (enabled)
         {
             var myPos = transform.position;
             var playerPos = Global.Player.transform.position;
-            if (Vector2.Distance(new Vector2(myPos.x, myPos.z), new Vector2(playerPos.x, playerPos.z)) < 1f)
+            var dist = Vector2.Distance(new Vector2(myPos.x, myPos.z), new Vector2(playerPos.x, playerPos.z));
+            Debug.Log(gameObject.name + ": " + dist);
+            if (dist < 1f)
             {
-                Global.Player.transform.position = SafetyPos;
+                Global.Controller.Teleport(SafetyPos);
+                enabled = false; // won't be stuck after hopefully
+            }
+            else if (dist > 5f)
+            {
+                enabled = false; // save useless calculations, they aren't stuck clearly
             }
         }
     }
