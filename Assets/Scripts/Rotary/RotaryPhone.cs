@@ -10,9 +10,6 @@ public class RotaryPhone : MonoBehaviour
     private const float RotToSpeed = 270f;
     private const float RotFromSpeed = RotToSpeed * -0.6f;
 
-    [Header("Puzzle")]
-    [SerializeField] public string[] PhoneNumbers = new string[0];
-
     [Header("Controls")]
     [SerializeField] public GameObject Plate;
     [Space(12)]
@@ -29,7 +26,7 @@ public class RotaryPhone : MonoBehaviour
     [SerializeField] public GameObject Pound;
     [SerializeField] public GameObject Asterisk;
 
-    [Header("Debug")]
+    [Header("Puzzle")]
     [SerializeField] public string CorrectNumber;
     internal List<string> EnteredNumber = new();
     [SerializeField] internal bool Correct = false;
@@ -41,17 +38,6 @@ public class RotaryPhone : MonoBehaviour
     void Start()
     {
         origAngle = Plate.transform.localEulerAngles.z;
-        if (PhoneNumbers.Length > 0)
-        {
-            CorrectNumber = PhoneNumbers[Random.Range(0, PhoneNumbers.Length)];
-        }
-        else
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                CorrectNumber += Random.Range(0, 10).ToString();
-            }
-        }
 
         // Deal with the controls and stuff
         // 74.818
