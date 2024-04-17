@@ -6,21 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class EndScreenHandler : MonoBehaviour
 {
-
     public Button quitButton;
     public Button mainMenuButton;
 
-    // Start is called before the first frame update
     void Start()
     {
         quitButton.onClick.AddListener(QuitGame);
         mainMenuButton.onClick.AddListener(changeScene);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Unlock cursor
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void QuitGame()
