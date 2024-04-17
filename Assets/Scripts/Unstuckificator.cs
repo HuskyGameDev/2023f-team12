@@ -19,7 +19,6 @@ public class Unstuckificator : MonoBehaviour
             var myPos = transform.position;
             var playerPos = Global.Player.transform.position;
             var dist = Vector2.Distance(new Vector2(myPos.x, myPos.z), new Vector2(playerPos.x, playerPos.z));
-            Debug.Log(gameObject.name + ": " + dist);
             if (dist < 1f)
             {
                 Global.Controller.Teleport(SafetyPos);
