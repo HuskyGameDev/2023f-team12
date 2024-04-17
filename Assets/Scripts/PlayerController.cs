@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Switching things in the inventory (only do when not inspecting)
-        if (!Inspecting)
+        /*if (!Inspecting)
         {
             if (Input.mouseScrollDelta.y > 0f)
             {
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
             {
                 Global.PrevItem();
             }
-        }
+        }*/
 
        
     }

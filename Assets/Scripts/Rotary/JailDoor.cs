@@ -13,9 +13,10 @@ public class JailDoor : MonoBehaviour
 
         GetComponent<Interactable>().OnInteract += (self, args) =>
         {
+            Debug.Log(args.HeldObject?.name);
             if (args.HeldObject?.name == "Key")
             {
-                hinge.Play("Base Layer.JailDoor");
+                hinge.Play("Base Layer.Open");
             }
         };
     }
