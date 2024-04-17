@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class RotaryPhone : MonoBehaviour
@@ -73,6 +74,7 @@ public class RotaryPhone : MonoBehaviour
         if (Correct)
         {
             // do stuff
+
         }
         else if (Rotating)
         {
@@ -126,6 +128,7 @@ public class RotaryPhone : MonoBehaviour
                 {
                     Correct = true;
                     OnSuccess?.Invoke();
+                    SceneManager.LoadScene(3);
                     Debug.Log("Phone number correct");
                 }
                 else
@@ -140,9 +143,9 @@ public class RotaryPhone : MonoBehaviour
 
     internal void HandleButton(string num, float rot)
     {
-        Debug.Log(num);
         if (!Correct && !Rotating)
         {
+            Debug.Log(num);
             Rotating = true;
             rotToAngle = (origAngle + rot) % 360f;
             EnteredNumber.Add(num);
