@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] public Transform playerCamera = null;
-    [SerializeField] float mouseSensitivity = 1f;
     [SerializeField] float walkSpeed = 6.0f;
     [SerializeField] float gravity = -13.0f;
     [SerializeField] [Range(0.0f, 0.5f)] float smoothMoveTime = 0.3f;
     [SerializeField] [Range(0.0f, 0.5f)] float mouseSmoothTime = 0.03f;
+    float mouseSensitivity { get => Global.MouseSensitivity; }
 
     [SerializeField] bool lockCursor = true;
 
@@ -43,6 +43,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(Time.timeScale == 0)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            return;
+        }
+
         // Deal with movement
         UpdateMouseLook();
         UpdateMovement();
@@ -58,7 +65,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Switching things in the inventory (only do when not inspecting)
-        if (!Inspecting)
+        /*if (!Inspecting)
         {
             if (Input.mouseScrollDelta.y > 0f)
             {
@@ -68,13 +75,9 @@ public class PlayerController : MonoBehaviour
             {
                 Global.PrevItem();
             }
-        }
+        }*/
 
-        // Temp solution until pause menu: escape quits game
-        if (Input.GetKeyDown("escape"))
-        {
-            Application.Quit();
-        }
+       
     }
 
     void UpdateMouseLook()
@@ -171,6 +174,14 @@ public class PlayerController : MonoBehaviour
                 HeldItem = null;
             }
         }
+    }
+
+    public void Teleport(Vector3 to)
+    {
+        // https://discussions.unity.com/t/teleporting-character-issue-with-transform-position-in-unity-2018-3/221631/4
+        controller.enabled = false;
+        gameObject.transform.position = to;
+        controller.enabled = true;
     }
 
     private Item HeldItem
