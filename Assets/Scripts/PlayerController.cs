@@ -26,8 +26,11 @@ public class PlayerController : MonoBehaviour
 
     Vector2 currentMouseDelta = Vector2.zero;
     Vector2 currentMouseDeltaVelocity = Vector2.zero;
+    Vector3 initialPos;
+
     void Start()
     {
+        initialPos = transform.position;
         Global.Player = gameObject;
         Global.Controller = this;
         crosshair = GameObject.Find("Crosshair");
@@ -128,6 +131,11 @@ public class PlayerController : MonoBehaviour
 
         Vector3 velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * walkSpeed + Vector3.up * velocityY;
         controller.Move(velocity * Time.deltaTime);
+
+        if (velocityY < -50f)
+        {
+            Teleport(initialPos);
+        }
     }
 
     void OnClick(bool rightClick)

@@ -46,12 +46,16 @@ public class Item : Interactable
             }
         }
 
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (Mathf.Abs(rb.velocity.y) > FALL_SPEED_THRESH)
+        if (Mathf.Abs(GetComponent<Rigidbody>().velocity.y) > FALL_SPEED_THRESH)
         {
-            transform.position = startPos;
-            rb.velocity = Vector3.zero;
+            ResetPosition();
         }
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = startPos;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 
     public void PickUp()
