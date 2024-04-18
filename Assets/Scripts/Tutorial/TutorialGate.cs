@@ -72,8 +72,7 @@ public class TutorialGate : MonoBehaviour
             {
                 var playerPos = Global.Player.transform.position;
                 var myPos = transform.position;
-                conditionMet = Vector2.Distance(new Vector2(playerPos.x, playerPos.z), new Vector2(myPos.x, myPos.z)) < 2f; // arbitrary close distance
-                //conditionMet = conditionReferences[0].GetComponent<PlayerController>().currentDirVelocity != Vector2.zero;
+                conditionMet = Vector2.Distance(new Vector2(playerPos.x, playerPos.z), new Vector2(myPos.x, myPos.z)) < 4f; // arbitrary distance
             }
         }
     }
