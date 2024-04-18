@@ -51,16 +51,17 @@ public class RotaryPhone : MonoBehaviour
         if (Util.TryGetComponent<Interactable>(Eight,    out var inter8)) inter8.OnInteract += (_, _) => HandleButton("8", 273.482f - 74.818f);
         if (Util.TryGetComponent<Interactable>(Nine,     out var inter9)) inter9.OnInteract += (_, _) => HandleButton("9", 299.201f - 74.818f);
         if (Util.TryGetComponent<Interactable>(Zero,     out var inter0)) inter0.OnInteract += (_, _) => HandleButton("0", 326.8f   - 74.818f);
-        //if (Util.TryGetComponent<Interactable>(Pound,    out var interP)) interP.OnInteract += (_, _) => HandleButton("#", 378.703f);
-        //if (Util.TryGetComponent<Interactable>(Asterisk, out var interA)) interA.OnInteract += (_, _) => HandleButton("*", 353.904f);
+        if (Util.TryGetComponent<Interactable>(Pound,    out var interP)) interP.OnInteract += (_, _) => ClearNumber(378.703f); // HandleButton("#", 378.703f);
+        if (Util.TryGetComponent<Interactable>(Asterisk, out var interA)) interA.OnInteract += (_, _) => ClearNumber(353.904f); // HandleButton("*", 353.904f);
+
+        // GetComponent<Interactable>().OnInteract += (_, _) => ClearNumber(0f);
     }
 
     void Update()
     {
         if (Correct)
         {
-            // do stuff
-
+            // do stuff (aka nothing lol)
         }
         else if (Rotating)
         {
@@ -131,10 +132,26 @@ public class RotaryPhone : MonoBehaviour
     {
         if (!Correct && !Rotating)
         {
-            Debug.Log(num);
             Rotating = true;
             rotToAngle = (origAngle + rot) % 360f;
-            EnteredNumber.Add(num);
+            if (num != string.Empty)
+            {
+                Debug.Log(num);
+                EnteredNumber.Add(num);
+            }
+        }
+    }
+
+    internal void ClearNumber(float rot)
+    {
+        if (!Correct && !Rotating)
+        {
+            Debug.Log("Cleared");
+            EnteredNumber.Clear();
+            if (rot != 0f)
+            {
+                HandleButton(string.Empty, rot);
+            }
         }
     }
 

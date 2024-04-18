@@ -6546,6 +6546,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RotaryPhone
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e0cfbce64e85c924a815db4b357cd190, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1240952492711720858, guid: e0cfbce64e85c924a815db4b357cd190, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -6569,6 +6573,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e0cfbce64e85c924a815db4b357cd190, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1281985122}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e0cfbce64e85c924a815db4b357cd190, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1281985123}
     - targetCorrespondingSourceObject: {fileID: -2997109266401164156, guid: e0cfbce64e85c924a815db4b357cd190, type: 3}
       insertIndex: -1
       addedObject: {fileID: 643054352}
@@ -28117,6 +28124,29 @@ MonoBehaviour:
   Asterisk: {fileID: 1113278181}
   CorrectNumber: 9065559899
   Correct: 0
+--- !u!136 &1281985123
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281985120}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.4
+  m_Height: 3.5
+  m_Direction: 0
+  m_Center: {x: 0, y: 1.9, z: 0.5}
 --- !u!1001 &1289676321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36401,8 +36431,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.052999984, y: 0.11799993, z: 0.008525506}
-  m_Center: {x: 0, y: -1.2531133e-10, z: 0.00026279694}
+  m_Size: {x: 0.052999984, y: 0.11799993, z: 0.008}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1615039974
 Rigidbody:
   m_ObjectHideFlags: 0
