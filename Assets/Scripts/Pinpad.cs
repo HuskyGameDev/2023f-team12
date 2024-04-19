@@ -81,6 +81,7 @@ public class Pinpad : MonoBehaviour
             if (interactable is null) throw new Exception("Reset key must be interactable!");
 
             interactable.OnInteract += (_, _) => {
+                OnReset?.Invoke();
                 ResetCombo();
             };
         }
@@ -158,6 +159,7 @@ public class Pinpad : MonoBehaviour
     }
 
     public event EventHandler<OnKeyPressEventArgs> OnKeyPress;
+    public event Action OnReset;
     public event Action OnSuccess;
     public event Action OnFail;
 

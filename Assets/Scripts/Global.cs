@@ -64,12 +64,8 @@ public static class Global
         {
             Inventory[i] = null;
         }
+
         SceneManager.LoadScene(name, LoadSceneMode.Single);
-
-        // Scene newScene = SceneManager.GetSceneByName(name);
-        // SceneManager.SetActiveScene(newScene);
-        // SceneManager.UnloadScene(currScene);
-
         Debug.Log(SceneManager.GetActiveScene().name);
         // MoveInventoryToScene(newScene);
 

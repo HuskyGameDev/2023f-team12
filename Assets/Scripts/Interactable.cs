@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    void Start() { }
-
-    void Update() { }
-
     public void Interact(Item heldItem)
     {
         OnInteractEventArgs args = new();

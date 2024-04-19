@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class JailDoor : MonoBehaviour
 {
-    [SerializeField] GameObject door; 
+    [SerializeField] GameObject door;
+    [SerializeField] GameObject egg;
     private Animator hinge;
 
     void Start()
@@ -16,6 +17,10 @@ public class JailDoor : MonoBehaviour
             if (args.HeldObject?.name == "Key")
             {
                 hinge.Play("Base Layer.Open");
+            }
+            else if (args.HeldObject?.name == "goldBar (61)")
+            {
+                Global.Controller.Teleport(egg.transform.position);
             }
         };
     }

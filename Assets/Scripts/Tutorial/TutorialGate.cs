@@ -12,7 +12,7 @@ public class TutorialGate : MonoBehaviour
     }
 
     [SerializeField] GateCondition conditionToOpen;
-    [SerializeField] GameObject conditionReference;
+    [SerializeField] GameObject[] conditionReferences;
     [SerializeField] Vector3 endPos;
     [SerializeField] float moveDuration = 1f;
 
@@ -29,19 +29,25 @@ public class TutorialGate : MonoBehaviour
         {
             case GateCondition.PickUp:
                 {
-                    Item item = conditionReference?.GetComponent<Item>();
-                    if (item is not null)
+                    foreach (var reference in conditionReferences)
                     {
-                        item.OnPickUp += (_) => { conditionMet = true; };
+                        Item item = reference.GetComponent<Item>();
+                        if (item is not null)
+                        {
+                            item.OnPickUp += (_) => { conditionMet = true; };
+                        }
                     }
                     break;
                 }
             case GateCondition.Inspect:
                 {
-                    Item item = conditionReference?.GetComponent<Item>();
-                    if (item is not null)
+                    foreach (var reference in conditionReferences)
                     {
-                        item.OnInspect += (_) => { conditionMet = true; };
+                        Item item = reference.GetComponent<Item>();
+                        if (item is not null)
+                        {
+                            item.OnInspect += (_) => { conditionMet = true; };
+                        }
                     }
                     break;
                 }
@@ -64,7 +70,9 @@ public class TutorialGate : MonoBehaviour
         {
             if (conditionToOpen == GateCondition.Move)
             {
-                conditionMet = conditionReference.GetComponent<PlayerController>().currentDirVelocity != Vector2.zero;
+                var playerPos = Global.Player.transform.position;
+                var myPos = transform.position;
+                conditionMet = Vector2.Distance(new Vector2(playerPos.x, playerPos.z), new Vector2(myPos.x, myPos.z)) < 4f; // arbitrary distance
             }
         }
     }
