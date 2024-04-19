@@ -118,7 +118,7 @@ public class RotaryPhone : MonoBehaviour
                 {
                     Correct = true;
                     OnSuccess?.Invoke();
-                    SceneManager.LoadScene(3);
+                    SceneManager.LoadScene("WinScreen", LoadSceneMode.Single);
                     Debug.Log("Phone number correct");
                 }
                 else
