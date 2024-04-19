@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
-
     public AudioMixer theMixer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +21,24 @@ public class AudioManager : MonoBehaviour
         {
             theMixer.SetFloat("SFXVol", PlayerPrefs.GetFloat("SFXVol"));
         }
+    }
+
+    public void SetMasterVol(float soundLevel)
+    {
+        PlayerPrefs.SetFloat("MasterVol", soundLevel);
+        theMixer.SetFloat("MasterVol", soundLevel);
+    }
+
+    public void SetMusicVol(float soundLevel)
+    {
+        PlayerPrefs.SetFloat("MusicVol", soundLevel);
+        theMixer.SetFloat("MusicVol", soundLevel);
+    }
+
+    public void SetSFXVol(float soundLevel)
+    {
+        PlayerPrefs.SetFloat("SFXVol", soundLevel);
+        theMixer.SetFloat("SFXVol", soundLevel);
     }
 
 }
