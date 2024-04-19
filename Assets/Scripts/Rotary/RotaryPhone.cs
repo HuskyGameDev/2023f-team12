@@ -7,8 +7,12 @@ using Random = UnityEngine.Random;
 
 public class RotaryPhone : MonoBehaviour
 {
-    private const float RotToSpeed = 270f;
-    private const float RotFromSpeed = RotToSpeed * -0.6f;
+    private const float RotToSpeed = 255f / .5f;
+    private const float RotFromSpeed = RotToSpeed * -0.313f;
+
+    [Header("Puzzle")]
+    [SerializeField] public string CorrectNumber;
+    [SerializeField] internal bool Correct = false;
 
     [Header("Controls")]
     [SerializeField] public GameObject Plate;
@@ -26,12 +30,11 @@ public class RotaryPhone : MonoBehaviour
     [SerializeField] public GameObject Pound;
     [SerializeField] public GameObject Asterisk;
 
-    [Header("Puzzle")]
-    [SerializeField] public string CorrectNumber;
-    internal List<string> EnteredNumber = new();
-    [SerializeField] internal bool Correct = false;
-    internal bool Rotating = false;
+    [Header("Sound")]
+    [SerializeField] AudioClip[] AudioClips;
 
+    internal List<string> EnteredNumber = new();
+    internal bool Rotating = false;
     private float rotToAngle;
     private float origAngle;
 
@@ -51,7 +54,7 @@ public class RotaryPhone : MonoBehaviour
         if (Util.TryGetComponent<Interactable>(Eight,    out var inter8)) inter8.OnInteract += (_, _) => HandleButton("8", 273.482f - 74.818f);
         if (Util.TryGetComponent<Interactable>(Nine,     out var inter9)) inter9.OnInteract += (_, _) => HandleButton("9", 299.201f - 74.818f);
         if (Util.TryGetComponent<Interactable>(Zero,     out var inter0)) inter0.OnInteract += (_, _) => HandleButton("0", 326.8f   - 74.818f);
-        if (Util.TryGetComponent<Interactable>(Pound,    out var interP)) interP.OnInteract += (_, _) => ClearNumber(378.703f); // HandleButton("#", 378.703f);
+        if (Util.TryGetComponent<Interactable>(Pound,    out var interP)) interP.OnInteract += (_, _) => ClearNumber(353.904f); // HandleButton("#", 378.703f);
         if (Util.TryGetComponent<Interactable>(Asterisk, out var interA)) interA.OnInteract += (_, _) => ClearNumber(353.904f); // HandleButton("*", 353.904f);
 
         // GetComponent<Interactable>().OnInteract += (_, _) => ClearNumber(0f);
@@ -128,6 +131,13 @@ public class RotaryPhone : MonoBehaviour
         }
     }
 
+    internal void PlaySoundFor(int num)
+    {
+        var aSource = GetComponent<AudioSource>();
+        aSource.clip = AudioClips[num];
+        aSource.Play();
+    }
+
     internal void HandleButton(string num, float rot)
     {
         if (!Correct && !Rotating)
@@ -138,6 +148,10 @@ public class RotaryPhone : MonoBehaviour
             {
                 Debug.Log(num);
                 EnteredNumber.Add(num);
+            }
+            if (int.TryParse(num, out int dial))
+            {
+                PlaySoundFor(dial);
             }
         }
     }
@@ -151,6 +165,7 @@ public class RotaryPhone : MonoBehaviour
             if (rot != 0f)
             {
                 HandleButton(string.Empty, rot);
+                PlaySoundFor(0);
             }
         }
     }
