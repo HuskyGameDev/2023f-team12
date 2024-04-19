@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Unstuckificator : MonoBehaviour
 {
-    [SerializeField] bool enabled = false;
+    [SerializeField] new bool enabled = false;
     private Vector3 SafetyPos;
 
     void Start()

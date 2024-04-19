@@ -23,8 +23,9 @@ public class OpenWall : MonoBehaviour
                 pressed = true;
                 doorAnimator.Play("Base Layer.Wall");
                 StartCoroutine(SafeAnimation());
-                GetComponent<AudioSource>()?.Play();
-                door.GetComponent<AudioSource>()?.Play();
+                GetComponent<AudioSource>().Play();
+                Debug.Log(door.GetComponent<AudioSource>());
+                door.GetComponent<AudioSource>().Play();
             }
         };
     }
@@ -34,7 +35,8 @@ public class OpenWall : MonoBehaviour
         yield return new WaitForSeconds(7);
         safe.GetComponent<Animator>().Play("Base Layer.OpenBig");
         StartCoroutine(EnableSafety());
-        safe.GetComponent<AudioSource>()?.Play();
+        door.GetComponent<AudioSource>().Stop();
+        safe.transform.Find("Vault Door").gameObject.GetComponent<AudioSource>().Play();
     }
 
     IEnumerator EnableSafety()
