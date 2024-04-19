@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     Vector2 currentMouseDelta = Vector2.zero;
     Vector2 currentMouseDeltaVelocity = Vector2.zero;
-    Vector3 initialPos;
+    internal Vector3 initialPos;
 
     void Start()
     {
